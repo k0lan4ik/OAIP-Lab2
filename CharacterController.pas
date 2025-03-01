@@ -11,6 +11,7 @@ type
   TCharacter = class
     public
       Body: array [TBodyPart] of TPoint;
+      Scale: Real;
       Canvas: TCanvas;
       constructor Create(const X,Y :Integer; Canvas: TCanvas);
       procedure Paint(colorPen, colorFill: TColor);
@@ -22,6 +23,7 @@ implementation
   constructor TCharacter.Create(const X,Y :Integer; Canvas: TCanvas);
   begin
     self.Canvas := Canvas;
+    self.Scale := 1;
     self.Body[bpGroin] := TPoint.Create(X,Y);
     self.Body[bpBreast] := TPoint.Create(0,-20);
     self.Body[bpNeck] := TPoint.Create(0,-40 );
@@ -55,26 +57,26 @@ implementation
       MoveTo(groin.X,groin.Y);
       for i := bpBreast to bpLfPalm do
       begin
-        LineTo(self.Body[i].X + groin.X, self.Body[i].Y + groin.Y);
+        LineTo(Round(self.Body[i].X * self.Scale) + groin.X, Round(self.Body[i].Y * self.Scale) + groin.Y);
       end;
-      MoveTo(groin.X + self.Body[bpNeck].X,groin.Y+ self.Body[bpNeck].Y);
+      MoveTo(groin.X + Round(self.Body[bpNeck].X * self.Scale),groin.Y+ Round(self.Body[bpNeck].Y * self.Scale));
       for i := bpRtArm to bpRtPalm do
       begin
-        LineTo(self.Body[i].X + groin.X, self.Body[i].Y + groin.Y);
+        LineTo(Round(self.Body[i].X * self.Scale) + groin.X, Round(self.Body[i].Y * self.Scale) + groin.Y);
       end;
       MoveTo(groin.X,groin.Y);
       for i := bpLfHip to bpLfFoot do
       begin
-        LineTo(self.Body[i].X + groin.X, self.Body[i].Y + groin.Y);
+        LineTo(Round(self.Body[i].X * self.Scale) + groin.X, Round(self.Body[i].Y * self.Scale) + groin.Y);
       end;
       MoveTo(groin.X,groin.Y);
       for i := bpRtHip to bpRtFoot do
       begin
-        LineTo(self.Body[i].X + groin.X, self.Body[i].Y + groin.Y);
+        LineTo(Round(self.Body[i].X * self.Scale) + groin.X, Round(self.Body[i].Y * self.Scale) + groin.Y);
       end;
 
-      R := Round(sqrt(sqr(self.Body[bpNeck].X - self.Body[bpHead].X) + sqr(self.Body[bpNeck].Y - self.Body[bpHead].Y)));
-      Ellipse(groin.X + self.Body[bpHead].X - R, groin.Y + self.Body[bpHead].Y + R,groin.X + self.Body[bpHead].X + R,groin.Y + self.Body[bpHead].Y - R);
+      R := Round(self.Scale * sqrt(sqr(self.Body[bpNeck].X - self.Body[bpHead].X) + sqr(self.Body[bpNeck].Y - self.Body[bpHead].Y)));
+      Ellipse(groin.X + Round(self.Body[bpHead].X * self.Scale) - R, groin.Y + Round(self.Body[bpHead].Y * self.Scale) + R,groin.X + Round(self.Body[bpHead].X * self.Scale) + R,groin.Y + Round(self.Body[bpHead].Y * self.Scale) - R);
     end;
   end;
 
