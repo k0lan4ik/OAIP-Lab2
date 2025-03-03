@@ -14,7 +14,7 @@ type
       Scale: Real;
       Canvas: TCanvas;
       constructor Create(const X,Y :Integer; Canvas: TCanvas);
-      procedure Paint(colorPen, colorFill: TColor; penWidth: integer);
+      procedure Paint(colorPen, colorFill: TColor; penWidth: real);
     private
   end;
 
@@ -38,10 +38,11 @@ implementation
     self.Body[bpRtShin] := TPoint.Create(20,40);
     self.Body[bpRtFoot] := TPoint.Create(40,40);
     self.Body[bpHead] := TPoint.Create(0,-60);
-    self.Paint(clBlack,clWhite, Round(10 * self.Scale));
+    self.Canvas.Pen.Width := 3;
+    self.Paint(clBlack,clWhite, 10 * self.Scale);
   end;
 
-  procedure TCharacter.Paint(colorPen, colorFill: TColor; penWidth: integer);
+  procedure TCharacter.Paint(colorPen, colorFill: TColor; penWidth: Real);
   var
     i: TBodyPart;
     R: Integer;
@@ -50,7 +51,6 @@ implementation
     groin := self.Body[bpGroin];
     with self.Canvas do
     begin
-      Pen.Width := penWidth;
       Pen.Color := colorPen;
       Brush.Color := colorFill;
       MoveTo(groin.X,groin.Y);

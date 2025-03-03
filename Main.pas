@@ -42,9 +42,9 @@ procedure TForm2.OnPaint(Sender: TObject);
 begin
 
   Characer.Scale := Scale;
-  Characer.Body[bpGroin] := TPoint.Create(200,200);
-  Characer.Paint(clBlack,clWhite);
-  Scale := 1 + (GetTickCount - Start) * 0.0005;
+  Characer.Body[bpGroin] := TPoint.Create(200,300);
+  Characer.Paint(clBlack,clWhite, Round(10*scale));
+  Scale := 1 + (GetTickCount - Start) * 0.002;
 
 end;
 procedure TForm2.OnTimer(Sender: TObject);

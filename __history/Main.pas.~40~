@@ -9,8 +9,9 @@ uses
 type
   TForm2 = class(TForm)
     Timer1: TTimer;
-    procedure OnTimer(Sender: TObject);
+    procedure OnPaint(Sender: TObject);
     procedure OnCreate(Sender: TObject);
+    procedure OnTimer(Sender: TObject);
   private
     { Private declarations }
   public
@@ -37,14 +38,21 @@ begin
   Scale := 1;
 end;
 
-procedure TForm2.OnTimer(Sender: TObject);
+procedure TForm2.OnPaint(Sender: TObject);
 begin
 
   Characer.Scale := Scale;
   Characer.Body[bpGroin] := TPoint.Create(200,200);
-  Characer.Paint(clBlack,clWhite);
-  Scale := 1 + (GetTickCount - Start) * 0.0001;
+  Characer.Paint(clBlack,clWhite,10*scale);
+  Scale := 1 + (GetTickCount - Start) * 0.005;
 
+end;
+procedure TForm2.OnTimer(Sender: TObject);
+begin
+
+  InValidateRect(form2.handle,NIL,True);
+  if GetTickCount - Start > 2000 then
+    Timer1.Enabled := false
 end;
 
 end.
