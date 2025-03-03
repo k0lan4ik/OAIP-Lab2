@@ -10,6 +10,13 @@ object Form2: TForm2
   Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
+  OnCreate = OnCreate
   OnPaint = OnPaint
   TextHeight = 15
+  object Timer1: TTimer
+    Interval = 1
+    OnTimer = OnTimer
+    Left = 304
+    Top = 104
+  end
 end
