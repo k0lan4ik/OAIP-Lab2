@@ -40,23 +40,14 @@ end;
 
 procedure TForm2.OnPaint(Sender: TObject);
 begin
-
-  Characer.Scale := Scale;
-  Characer.Body[bpGroin] := TPoint.Create(200,200);
-  Characer.Paint(clBlack,clWhite);
-  Scale := 1 + (GetTickCount - Start) * 0.0001;
-
+     Characer.Paint(Characer.Body,Point(0,0));
 end;
 procedure TForm2.OnTimer(Sender: TObject);
 begin
 
-  Characer.Scale := Scale;
-  Characer.Body[bpGroin] := TPoint.Create(200,200);
-  Characer.Paint(clBlack,clWhite);
-  Scale := 1 + (GetTickCount - Start) * 0.0001;
-
-
-InValidateRect(form2.handle,NIL,True);
+  //InValidateRect(form2.handle,NIL,True);
+  if GetTickCount - Start > 2000 then
+    Timer1.Enabled := false
 end;
 
 end.

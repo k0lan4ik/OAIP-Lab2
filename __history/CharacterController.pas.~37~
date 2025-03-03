@@ -48,7 +48,7 @@ begin
         with Linked[0] do
         begin
           SetLength(Linked, 3);
-          Linked[0].Local := CalculateEndPoint(Trunc(Length * 0.75), Point(0, -1));
+          Linked[0].Local := CalculateEndPoint(Length, Point(0, -1));
           Linked[0].IsHead := true;
 
           Linked[1].Local := CalculateEndPoint(Length, Point(-1, 1));

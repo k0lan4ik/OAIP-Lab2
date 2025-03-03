@@ -10,26 +10,27 @@ uses
 type
   TBodyPart = record
     Local: TPoint;
-    IsHead: Boolean;
     Linked: array of TBodyPart;
   end;
 
   TCharacter = class
   public
     Body: TBodyPart;
-    Length: Integer;
+    Scale: Real;
     Canvas: TCanvas;
     constructor Create(const X, Y: Integer; Canvas: TCanvas);
     procedure Paint(const BodyPart: TBodyPart; const CurrentAbsolute: TPoint);
   private
-    function CalculateEndPoint(Length: Integer; const Target: TPoint): TPoint;
+    function CalculateEndPoint(length: Integer; const Target: TPoint): TPoint;
   end;
 
 implementation
 
 constructor TCharacter.Create(const X, Y: Integer; Canvas: TCanvas);
+var
+  len: Integer;
 begin
-  Length := 50;
+  len := 20;
   self.Canvas := Canvas;
   self.Body.Local := Point(X, Y);
   SetLength(self.Body.Linked, 3);
@@ -37,58 +38,57 @@ begin
   begin
     with Linked[0] do
     begin
-      Local := CalculateEndPoint(Trunc(Length * 0.75), Point(0, -1));
+      Local := CalculateEndPoint(Trunc(len * 0.75), Point(0, -1));
       SetLength(Linked, 1);
       with Linked[0] do
       begin
-        Local := CalculateEndPoint(Trunc(Length * 0.75), Point(0, -1));
+        Local := CalculateEndPoint(Trunc(len * 0.75), Point(0, -1));
 
         SetLength(Linked, 1);
-        Linked[0].Local := CalculateEndPoint(Length, Point(0, -1));
+        Linked[0].Local := CalculateEndPoint(len, Point(0, -1));
         with Linked[0] do
         begin
           SetLength(Linked, 3);
-          Linked[0].Local := CalculateEndPoint(Trunc(Length * 0.75), Point(0, -1));
-          Linked[0].IsHead := true;
+          Linked[0].Local := CalculateEndPoint(len, Point(0, -1));
 
-          Linked[1].Local := CalculateEndPoint(Length, Point(-1, 1));
+          Linked[1].Local := CalculateEndPoint(len, Point(-1, 1));
           with Linked[1] do
           begin
             SetLength(Linked, 1);
-            Linked[0].Local := CalculateEndPoint(Length, Point(0, 1));
+            Linked[0].Local := CalculateEndPoint(Trunc(len * 0.5), Point(0, 1));
           end;
 
-          Linked[2].Local := CalculateEndPoint(Length, Point(1, 1));
+          Linked[2].Local := CalculateEndPoint(Trunc(len * 0.5), Point(1, 1));
           with Linked[2] do
           begin
             SetLength(Linked, 1);
-            Linked[0].Local := CalculateEndPoint(Length, Point(0, 1));
+            Linked[0].Local := CalculateEndPoint(len, Point(0, 1));
           end;
         end;
       end;
     end;
 
-    Linked[1].Local := CalculateEndPoint(Length, Point(-1, 1));
+    Linked[1].Local := CalculateEndPoint(len, Point(-1, 1));
     with Linked[1] do
     begin
       SetLength(Linked, 1);
-      Linked[0].Local := CalculateEndPoint(Length, Point(0, 1));
+      Linked[0].Local := CalculateEndPoint(len, Point(0, 1));
       with Linked[0] do
       begin
         SetLength(Linked, 1);
-        Linked[0].Local := CalculateEndPoint(Trunc(Length * 0.5), Point(-1, 0));
+        Linked[0].Local := CalculateEndPoint(len, Point(-1, 0));
       end;
     end;
 
-    Linked[2].Local := CalculateEndPoint(Length, Point(1, 1));
+    Linked[2].Local := CalculateEndPoint(len, Point(1, 1));
     with Linked[2] do
     begin
       SetLength(Linked, 1);
-      Linked[0].Local := CalculateEndPoint(Length, Point(0, 1));
+      Linked[0].Local := CalculateEndPoint(len, Point(0, 1));
       with Linked[0] do
       begin
         SetLength(Linked, 1);
-        Linked[0].Local := CalculateEndPoint(Trunc(Length * 0.5), Point(1, 0));
+        Linked[0].Local := CalculateEndPoint(len, Point(1, 0));
       end;
     end;
   end;
@@ -101,7 +101,7 @@ end;
 procedure TCharacter.Paint(const BodyPart: TBodyPart;
   const CurrentAbsolute: TPoint);
 var
-  i, R: Integer;
+  i: Integer;
   NextAbsolute: TPoint;
 begin
 
@@ -109,30 +109,22 @@ begin
   NextAbsolute := Point(CurrentAbsolute.X + BodyPart.Local.X,
     CurrentAbsolute.Y + BodyPart.Local.Y);
 
+  // –исуем линии между текущей точкой и всеми св€занными точками
   for i := 0 to High(BodyPart.Linked) do
   begin
+    // –исуем линию от текущей точки к св€занной точке
+    Canvas.MoveTo(NextAbsolute.X, NextAbsolute.Y);
 
-    if BodyPart.Linked[i].IsHead then
-    begin
-      R := Round(Sqrt(Sqr(BodyPart.Linked[i].Local.X) +
-        Sqr(BodyPart.Linked[i].Local.Y)));
-      Canvas.Ellipse(NextAbsolute.X + BodyPart.Linked[i].Local.X - R,
-        NextAbsolute.Y + BodyPart.Linked[i].Local.Y + R,
-        NextAbsolute.X + BodyPart.Linked[i].Local.X + R,
-        NextAbsolute.Y + BodyPart.Linked[i].Local.Y - R);
-    end
-    else
-    begin
-      Canvas.MoveTo(NextAbsolute.X, NextAbsolute.Y);
+    // ¬ычисл€ем абсолютные координаты дл€ св€занной точки
+    Canvas.LineTo(NextAbsolute.X + BodyPart.Linked[i].Local.X,
+      NextAbsolute.Y + BodyPart.Linked[i].Local.Y);
 
-      Canvas.LineTo(NextAbsolute.X + BodyPart.Linked[i].Local.X,
-        NextAbsolute.Y + BodyPart.Linked[i].Local.Y);
-    end;
+    // –екурсивно отрисовываем св€занные точки
     Paint(BodyPart.Linked[i], NextAbsolute);
   end;
 end;
 
-function TCharacter.CalculateEndPoint(Length: Integer;
+function TCharacter.CalculateEndPoint(length: Integer;
   const Target: TPoint): TPoint;
 var
   deltaX, deltaY, D, normX, normY: Double;
@@ -153,8 +145,8 @@ begin
     normY := 0;
   end;
 
-  deltaX := Length * normX;
-  deltaY := Length * normY;
+  deltaX := length * normX;
+  deltaY := length * normY;
 
   Result := Point(Round(deltaX), Round(deltaY));
 end;
