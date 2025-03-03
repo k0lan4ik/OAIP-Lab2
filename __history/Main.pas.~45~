@@ -3,7 +3,8 @@ unit Main;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, CharacterController, Vcl.ExtCtrls;
 
 type
@@ -24,33 +25,31 @@ var
 implementation
 
 {$R *.dfm}
+
 var
   Characer: TCharacter;
   Buff: TBitMap;
   Timer, Start: Cardinal;
-  Scale :Real;
+  Test: integer;
 
 procedure TForm2.OnCreate(Sender: TObject);
 begin
-  Start := GetTickCount;
-  Buff := TBitMap.Create;
-  Characer := TCharacter.Create(100,100,Form2.Canvas);
-  Scale := 1;
+  //Start := GetTickCount;
+  Characer := TCharacter.Create(200, 300, Form2.Canvas);
+  Test := 200;
 end;
 
 procedure TForm2.OnPaint(Sender: TObject);
 begin
-
-  Characer.Scale := Scale;
-  Characer.Body[bpGroin] := TPoint.Create(200,200);
-  Characer.Paint(clBlack,clWhite);
-  Scale := 1 + (GetTickCount - Start) * 0.0001;
-
+  Characer.Paint(Characer.Body, Point(0, 0));
 end;
+
 procedure TForm2.OnTimer(Sender: TObject);
 begin
-
-  InValidateRect(form2.handle,NIL,True);
+  {
+  Characer := TCharacter.Create(Test,300,form2.Canvas);              //Тут должна быть смена кадров
+  Inc(Test, 10);
+  }
 end;
 
 end.

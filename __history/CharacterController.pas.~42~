@@ -105,6 +105,7 @@ var
   i, R: Integer;
   NextAbsolute: TPoint;
 begin
+
   // ¬ычисл€ем абсолютные координаты дл€ текущей точки
   NextAbsolute := Point(CurrentAbsolute.X + BodyPart.Local.X,
     CurrentAbsolute.Y + BodyPart.Local.Y);

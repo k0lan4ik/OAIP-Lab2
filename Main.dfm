@@ -15,7 +15,7 @@ object Form2: TForm2
   OnPaint = OnPaint
   TextHeight = 15
   object Timer1: TTimer
-    Interval = 1
+    Interval = 100
     OnTimer = OnTimer
     Left = 304
     Top = 104

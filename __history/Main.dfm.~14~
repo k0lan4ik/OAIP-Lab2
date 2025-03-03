@@ -5,6 +5,7 @@ object Form2: TForm2
   ClientHeight = 441
   ClientWidth = 624
   Color = clBtnFace
+  DoubleBuffered = True
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -12
@@ -13,4 +14,10 @@ object Form2: TForm2
   OnCreate = OnCreate
   OnPaint = OnPaint
   TextHeight = 15
+  object Timer1: TTimer
+    Interval = 1
+    OnTimer = OnTimer
+    Left = 304
+    Top = 104
+  end
 end
