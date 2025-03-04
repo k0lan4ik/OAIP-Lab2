@@ -14,19 +14,4 @@ object Form2: TForm2
   OnCreate = OnCreate
   OnPaint = OnPaint
   TextHeight = 15
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-  object Timer1: TTimer
-    Interval = 100
-    OnTimer = OnTimer
-    Left = 304
-    Top = 104
-  end
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
 end

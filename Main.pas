@@ -23,26 +23,6 @@ var
 implementation
 
 {$R *.dfm}
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-
-var
-  Character: TCharacter;
-  //Buff: TBitMap;
-  //Timer, Start: Cardinal;
-  Test: integer;
-
-procedure TForm2.OnCreate(Sender: TObject);
-begin
-  //Start := GetTickCount;
-  Character := TCharacter.Create(200, 300, Form2.Canvas);
-  Test := 0;
-=======
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
 const
   First:TBodyPRow = ((200,200),(0,-1),(0,-1),(0,-1),(-1,1),(0,1),(1,1),(0,1),(-1,1),(0,1),(-1,0),(1,1),(0,1),(1,0));
   Second:TBodyPRow = ((300,200),(0,-1),(0,-1),(0,-1),(-1,1),(0,1),(1,-1),(1,-1),(-1,1),(0,1),(-1,0),(1,1),(0,1),(1,0));
@@ -64,37 +44,14 @@ begin
   Characer.AddKeyFrame(Second, 50, 3000);
   Characer.AddKeyFrame(Tri, 50, 5000);
   Scale := 1;
->>>>>>> Stashed changes
 end;
 
 procedure TForm2.OnPaint(Sender: TObject);
 begin
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-  Character.Paint(Character.Body, Point(0, 0));
+
+  Characer.Paint(GetTickCount - Start);
+  if GetTickCount - Start < 5000 then
+    Form2.Invalidate;
 end;
 
-procedure TForm2.OnTimer(Sender: TObject);
-begin
-  Canvas.Rectangle(0,0,1000,1000);
-  Character.Paint(Character.Body, Point(Test, 0));        //Тут должна быть нормальная смена кадров
-  Inc(Test,10);
-=======
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-
-     Characer.Paint(GetTickCount - Start);
-     if GetTickCount - Start < 5000 then
-      Form2.Invalidate;
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-end;
 end.

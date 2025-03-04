@@ -42,16 +42,6 @@ implementation
 
 constructor TCharacter.Create(const Canvas: TCanvas);
 begin
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-  Length := 70;
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
   self.Canvas := Canvas;
   self.Canvas.Pen.Width := 3;
   self.Canvas.Pen.Color := clBlack;
@@ -94,23 +84,16 @@ begin
         with Linked[0] do
         begin
           SetLength(Linked, 3);
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-          Linked[0].Local := CalculateEndPoint(Trunc(Length * 0.75),
-            Point(0, -1));
-=======
+
+
           Linked[0].Local := CalculateEndPoint(Trunc(Len * 0.75),
             Point(Parts[4, 1], Parts[4, 2]));
->>>>>>> Stashed changes
-=======
+
           Linked[0].Local := CalculateEndPoint(Trunc(Len * 0.75),
             Point(Parts[4, 1], Parts[4, 2]));
->>>>>>> Stashed changes
-=======
+
           Linked[0].Local := CalculateEndPoint(Trunc(Len * 0.75),
             Point(Parts[4, 1], Parts[4, 2]));
->>>>>>> Stashed changes
           Linked[0].IsHead := true;
 
           Linked[1].Local := CalculateEndPoint(Len,
@@ -165,51 +148,18 @@ begin
       end;
     end;
   end;
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-  self.Canvas.Pen.Width := Round(Length*0.2);
-  self.Canvas.Pen.Color := clBlack;
-  self.Canvas.Brush.Color := clWhite;
-  self.Paint(Body, Point(0, 0));
-=======
 
->>>>>>> Stashed changes
-=======
-
->>>>>>> Stashed changes
-=======
-
->>>>>>> Stashed changes
 end;
 
 procedure TCharacter.Paint(const CurrentTime: Cardinal);
 var
   left, right, mid: Integer;
 begin
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-  // ¬ычисл€ем абсолютные координаты дл€ текущей точки
-  NextAbsolute := Point(CurrentAbsolute.X + BodyPart.Local.X,
-    CurrentAbsolute.Y + BodyPart.Local.Y);
 
-  for i := 0 to High(BodyPart.Linked) do
-=======
   left := Low(self.KeyFrames) - 1;
   right := High(self.KeyFrames) + 1;
   while (left + 1 < right) do
->>>>>>> Stashed changes
-=======
-  left := Low(self.KeyFrames) - 1;
-  right := High(self.KeyFrames) + 1;
-  while (left + 1 < right) do
->>>>>>> Stashed changes
-=======
-  left := Low(self.KeyFrames) - 1;
-  right := High(self.KeyFrames) + 1;
-  while (left + 1 < right) do
->>>>>>> Stashed changes
+
   begin
     mid := (left + right) div 2;
     if self.KeyFrames[mid].Time <= CurrentTime then
@@ -228,7 +178,7 @@ end;
 
 function TCharacter.CalculateEndPoint(Length: Integer;
   const Target: TPoint): TPoint;
-{var
+var
   deltaX, deltaY, D, normX, normY: Double;
 begin
   deltaX := Target.X;
@@ -251,30 +201,6 @@ begin
   deltaY := Length * normY;
 
   Result := Point(Round(deltaX), Round(deltaY));
-end;}
-
-var
-  deltaX, deltaY, D, Ratio: Double;
-begin
-  deltaX := Target.X;
-  deltaY := Target.Y;
-
-  if (deltaX = 0) and (deltaY = 0) then
-  begin
-    Result := Point(0, 0);
-  end
-  else
-  begin
-
-    D := Sqrt(Sqr(deltaX) + Sqr(deltaY));
-
-    Ratio := Length / D;
-
-    deltaX := deltaX * Ratio;
-    deltaY := deltaY * Ratio;
-
-    Result := Point(Round(deltaX), Round(deltaY));
-  end;
 end;
 
 procedure TCharacter.Draw(const left, right: TBodyPart;const LeftT, RightT, CurT: Cardinal;
@@ -284,7 +210,7 @@ var
   NextAbsolute, BodyPart: TPoint;
 begin
 
-  
+
 
   for i := 0 to High(left.Linked) do
   begin
@@ -307,79 +233,8 @@ begin
         self.Canvas.LineTo(CurAbs.X + BodyPart.X,
         CurAbs.Y + BodyPart.Y);
     end;
-      NextAbsolute := Point(CurAbs.X + BodyPart.X, CurAbs.Y + BodyPart.Y); 
+      NextAbsolute := Point(CurAbs.X + BodyPart.X, CurAbs.Y + BodyPart.Y);
     Draw(left.Linked[i], right.Linked[i], LeftT, RightT, CurT, NextAbsolute, Len);
   end;
 end;
-
-procedure TCharacter.Draw(const left, right: TBodyPart;const LeftT, RightT, CurT: Cardinal;
- const CurAbs: TPoint;const Len: Integer);
-var
-  i, R: Integer;
-  NextAbsolute, BodyPart: TPoint;
-begin
-
-  
-
-  for i := 0 to High(left.Linked) do
-  begin
-    BodyPart := self.CalculateEndPoint(Len, Lerp(left.Linked[i].Local, right.Linked[i].Local, LeftT,
-      CurT, RightT));
-    if left.Linked[i].IsHead then
-    begin
-      R := Round(Sqrt(Sqr(BodyPart.X) + Sqr(BodyPart.Y))) * 3 div 4;
-      self.Canvas.Ellipse(CurAbs.X + BodyPart.X * 3 div 4  - R,
-        CurAbs.Y + BodyPart.Y * 3 div 4 + R, CurAbs.X + BodyPart.X * 3 div 4  + R,
-        CurAbs.Y + BodyPart.Y * 3 div 4  - R);
-    end
-    else
-    begin
-      self.Canvas.MoveTo(CurAbs.X, CurAbs.Y);
-      if left.Linked[i].IsFoot then
-        self.Canvas.LineTo(CurAbs.X + BodyPart.X div 2,
-        CurAbs.Y  + BodyPart.Y div 2)
-      else
-        self.Canvas.LineTo(CurAbs.X + BodyPart.X,
-        CurAbs.Y + BodyPart.Y);
-    end;
-      NextAbsolute := Point(CurAbs.X + BodyPart.X, CurAbs.Y + BodyPart.Y); 
-    Draw(left.Linked[i], right.Linked[i], LeftT, RightT, CurT, NextAbsolute, Len);
-  end;
-end;
-
-procedure TCharacter.Draw(const left, right: TBodyPart;const LeftT, RightT, CurT: Cardinal;
- const CurAbs: TPoint;const Len: Integer);
-var
-  i, R: Integer;
-  NextAbsolute, BodyPart: TPoint;
-begin
-
-  
-
-  for i := 0 to High(left.Linked) do
-  begin
-    BodyPart := self.CalculateEndPoint(Len, Lerp(left.Linked[i].Local, right.Linked[i].Local, LeftT,
-      CurT, RightT));
-    if left.Linked[i].IsHead then
-    begin
-      R := Round(Sqrt(Sqr(BodyPart.X) + Sqr(BodyPart.Y))) * 3 div 4;
-      self.Canvas.Ellipse(CurAbs.X + BodyPart.X * 3 div 4  - R,
-        CurAbs.Y + BodyPart.Y * 3 div 4 + R, CurAbs.X + BodyPart.X * 3 div 4  + R,
-        CurAbs.Y + BodyPart.Y * 3 div 4  - R);
-    end
-    else
-    begin
-      self.Canvas.MoveTo(CurAbs.X, CurAbs.Y);
-      if left.Linked[i].IsFoot then
-        self.Canvas.LineTo(CurAbs.X + BodyPart.X div 2,
-        CurAbs.Y  + BodyPart.Y div 2)
-      else
-        self.Canvas.LineTo(CurAbs.X + BodyPart.X,
-        CurAbs.Y + BodyPart.Y);
-    end;
-      NextAbsolute := Point(CurAbs.X + BodyPart.X, CurAbs.Y + BodyPart.Y); 
-    Draw(left.Linked[i], right.Linked[i], LeftT, RightT, CurT, NextAbsolute, Len);
-  end;
-end;
-
 end.
