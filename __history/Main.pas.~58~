@@ -36,6 +36,7 @@ begin
 
   Start := GetTickCount;
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 <<<<<<<< Updated upstream:__history/Main.pas.~42~
   Buff := TBitMap.Create;
   Characer := TCharacter.Create(200,200,Form2.Canvas);
@@ -49,11 +50,17 @@ begin
   Characer.AddKeyFrame(Second, 50, 0);
   Characer.AddKeyFrame(First, 50, 5000);
 >>>>>>> Stashed changes
+=======
+  Characer := TCharacter.Create(Form2.Canvas);
+  Characer.AddKeyFrame(Second, 50, 0);
+  Characer.AddKeyFrame(First, 50, 5000);
+>>>>>>> Stashed changes
   Scale := 1;
 end;
 
 procedure TForm2.OnPaint(Sender: TObject);
 begin
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<<< Updated upstream:__history/Main.pas.~42~
      Characer.Paint(Characer.Body,Point(0,0));
@@ -69,13 +76,18 @@ end;
 ========
 =======
 >>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
 
      Characer.Paint(GetTickCount - Start);
      if GetTickCount - Start < 10000 then
       Form2.Invalidate;
 end;
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 >>>>>>>> Stashed changes:__history/Main.pas.~58~
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 end.

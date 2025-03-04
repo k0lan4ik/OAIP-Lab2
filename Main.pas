@@ -25,6 +25,7 @@ implementation
 {$R *.dfm}
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 
 var
   Character: TCharacter;
@@ -38,6 +39,8 @@ begin
   Character := TCharacter.Create(200, 300, Form2.Canvas);
   Test := 0;
 =======
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 const
@@ -68,6 +71,7 @@ procedure TForm2.OnPaint(Sender: TObject);
 begin
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   Character.Paint(Character.Body, Point(0, 0));
 end;
 
@@ -79,11 +83,16 @@ begin
 =======
 =======
 >>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
 
      Characer.Paint(GetTickCount - Start);
      if GetTickCount - Start < 5000 then
       Form2.Invalidate;
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes

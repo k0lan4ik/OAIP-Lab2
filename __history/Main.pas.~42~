@@ -36,6 +36,7 @@ begin
 
   Start := GetTickCount;
 <<<<<<<< Updated upstream:__history/Main.pas.~42~
+<<<<<<<< Updated upstream:__history/Main.pas.~42~
   Buff := TBitMap.Create;
   Characer := TCharacter.Create(200,200,Form2.Canvas);
 ========
@@ -43,21 +44,30 @@ begin
   Characer.AddKeyFrame(Second, 50, 0);
   Characer.AddKeyFrame(First, 50, 5000);
 >>>>>>>> Stashed changes:__history/Main.pas.~58~
+========
+  Characer := TCharacter.Create(Form2.Canvas);
+  Characer.AddKeyFrame(First, 50, 0);
+  Characer.AddKeyFrame(Second, 50, 5000);
+>>>>>>>> Stashed changes:__history/Main.pas.~59~
   Scale := 1;
 end;
 
 procedure TForm2.OnPaint(Sender: TObject);
 begin
 <<<<<<<< Updated upstream:__history/Main.pas.~42~
+<<<<<<<< Updated upstream:__history/Main.pas.~42~
      Characer.Paint(Characer.Body,Point(0,0));
 end;
 procedure TForm2.OnTimer(Sender: TObject);
 begin
+========
+>>>>>>>> Stashed changes:__history/Main.pas.~59~
 
-  //InValidateRect(form2.handle,NIL,True);
-  if GetTickCount - Start > 2000 then
-    Timer1.Enabled := false
+     Characer.Paint(GetTickCount - Start);
+     if GetTickCount - Start < 5000 then
+      Form2.Invalidate;
 end;
+<<<<<<<< Updated upstream:__history/Main.pas.~42~
 
 ========
 
@@ -66,4 +76,6 @@ end;
       Form2.Invalidate;
 end;
 >>>>>>>> Stashed changes:__history/Main.pas.~58~
+========
+>>>>>>>> Stashed changes:__history/Main.pas.~59~
 end.

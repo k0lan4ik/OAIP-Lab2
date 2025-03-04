@@ -39,8 +39,13 @@ begin
   Start := GetTickCount;
   Characer := TCharacter.Create(Form2.Canvas);
   Characer.AddKeyFrame(First, 50, 0);
+<<<<<<<< Updated upstream:__history/Main.pas.~64~
   Characer.AddKeyFrame(Second, 50, 2500);
   Characer.AddKeyFrame(Tri, 50, 5000);
+========
+  Characer.AddKeyFrame(Second, 50, 5000);
+  Characer.AddKeyFrame(Tri, 50, 10000);
+>>>>>>>> Stashed changes:__history/Main.pas.~63~
   Scale := 1;
 end;
 
@@ -48,7 +53,11 @@ procedure TForm2.OnPaint(Sender: TObject);
 begin
 
      Characer.Paint(GetTickCount - Start);
+<<<<<<<< Updated upstream:__history/Main.pas.~64~
      if GetTickCount - Start < 5000 then
+========
+     if GetTickCount - Start < 10000 then
+>>>>>>>> Stashed changes:__history/Main.pas.~63~
       Form2.Invalidate;
 end;
 end.

@@ -18,11 +18,16 @@ object Form2: TForm2
     Interval = 1
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+=======
+<<<<<<<< Updated upstream:__history/Main.dfm.~15~
+>>>>>>> Stashed changes
+<<<<<<< Updated upstream
 <<<<<<<< Updated upstream:__history/Main.dfm.~14~
     OnTimer = OnTimer
 ========
 >>>>>>>> Stashed changes:__history/Main.dfm.~15~
 =======
+<<<<<<< Updated upstream
 =======
 <<<<<<<< Updated upstream:__history/Main.dfm.~13~
 >>>>>>> Stashed changes
@@ -33,6 +38,11 @@ object Form2: TForm2
 <<<<<<< Updated upstream
 >>>>>>> Stashed changes
 =======
+========
+>>>>>>>> Stashed changes:__history/Main.dfm.~14~
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
 ========
 >>>>>>>> Stashed changes:__history/Main.dfm.~14~
 >>>>>>> Stashed changes

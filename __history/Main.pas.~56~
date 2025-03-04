@@ -4,10 +4,14 @@ interface
 
 uses
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
 =======
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
   System.Classes, Vcl.Graphics,
+>>>>>>> Stashed changes
+=======
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
 >>>>>>> Stashed changes
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, CharacterController, Vcl.ExtCtrls;
 
@@ -28,6 +32,7 @@ implementation
 
 {$R *.dfm}
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 =======
 <<<<<<<< Updated upstream:__history/Main.pas.~47~
 
@@ -38,17 +43,31 @@ var
 >>>>>>> Stashed changes
 const
   First:TBodyPRow = ((50,200),(0,-1),(0,-1),(0,-1),(-1,1),(0,1),(1,1),(0,1),(-1,1),(0,1),(-1,0),(1,1),(0,1),(1,0));
+=======
+const
+<<<<<<<< Updated upstream:__history/Main.pas.~62~
+  First:TBodyPRow = ((200,200),(0,-1),(0,-1),(0,-1),(-1,1),(0,1),(1,1),(0,1),(-1,1),(0,1),(-1,0),(1,1),(0,1),(1,0));
+========
+  First:TBodyPRow = ((50,200),(0,-1),(0,-1),(0,-1),(-1,1),(0,1),(1,1),(0,1),(-1,1),(0,1),(-1,0),(1,1),(0,1),(1,0));
+>>>>>>>> Stashed changes:__history/Main.pas.~56~
+>>>>>>> Stashed changes
   Second:TBodyPRow = ((100,200),(0,-1),(0,-1),(0,-1),(-1,1),(0,1),(1,-1),(1,-1),(-1,1),(0,1),(-1,0),(1,1),(0,1),(1,0));
 
 var
   Characer: TCharacter;
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   Timer, Start: Cardinal;
+=======
+  Timer, Start: Cardinal;
+  Scale :Real;
+>>>>>>> Stashed changes
 
 procedure TForm2.OnCreate(Sender: TObject);
 begin
 
   Start := GetTickCount;
+<<<<<<< Updated upstream
 <<<<<<<< Updated upstream:__history/Main.pas.~43~
   Buff := TBitMap.Create;
   Characer := TCharacter.Create(200,200,Form2.Canvas);
@@ -68,15 +87,21 @@ begin
 
   Start := GetTickCount;
 >>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
   Characer := TCharacter.Create(Form2.Canvas);
   Characer.AddKeyFrame(First, 50, 0);
   Characer.AddKeyFrame(Second, 50, 5000);
   Scale := 1;
+<<<<<<< Updated upstream
 >>>>>>>> Stashed changes:__history/Main.pas.~56~
+=======
+>>>>>>> Stashed changes
 end;
 
 procedure TForm2.OnPaint(Sender: TObject);
 begin
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<<< Updated upstream:__history/Main.pas.~43~
      Characer.Paint(Characer.Body,Point(0,0));
@@ -106,4 +131,15 @@ end;
       Form2.Invalidate;
 end;
 >>>>>>>> Stashed changes:__history/Main.pas.~56~
+=======
+
+     Characer.Paint(GetTickCount - Start);
+<<<<<<<< Updated upstream:__history/Main.pas.~62~
+     if GetTickCount - Start < 5000 then
+========
+     if GetTickCount - Start < 10000 then
+>>>>>>>> Stashed changes:__history/Main.pas.~56~
+      Form2.Invalidate;
+end;
+>>>>>>> Stashed changes
 end.
