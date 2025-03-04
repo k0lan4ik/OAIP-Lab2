@@ -24,6 +24,7 @@ implementation
 
 {$R *.dfm}
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 
 var
   Character: TCharacter;
@@ -37,6 +38,8 @@ begin
   Character := TCharacter.Create(200, 300, Form2.Canvas);
   Test := 0;
 =======
+=======
+>>>>>>> Stashed changes
 const
   First:TBodyPRow = ((200,200),(0,-1),(0,-1),(0,-1),(-1,1),(0,1),(1,1),(0,1),(-1,1),(0,1),(-1,0),(1,1),(0,1),(1,0));
   Second:TBodyPRow = ((300,200),(0,-1),(0,-1),(0,-1),(-1,1),(0,1),(1,-1),(1,-1),(-1,1),(0,1),(-1,0),(1,1),(0,1),(1,0));
@@ -64,6 +67,7 @@ end;
 procedure TForm2.OnPaint(Sender: TObject);
 begin
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   Character.Paint(Character.Body, Point(0, 0));
 end;
 
@@ -73,10 +77,15 @@ begin
   Character.Paint(Character.Body, Point(Test, 0));        //Тут должна быть нормальная смена кадров
   Inc(Test,10);
 =======
+=======
+>>>>>>> Stashed changes
 
      Characer.Paint(GetTickCount - Start);
      if GetTickCount - Start < 5000 then
       Form2.Invalidate;
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 end;
 end.

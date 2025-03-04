@@ -45,7 +45,11 @@ procedure TForm2.OnPaint(Sender: TObject);
 begin
 
      Characer.Paint(GetTickCount - Start);
+<<<<<<<< Updated upstream:__history/Main.pas.~59~
      if GetTickCount - Start < 5000 then
+========
+     if GetTickCount - Start < 10000 then
+>>>>>>>> Stashed changes:__history/Main.pas.~57~
       Form2.Invalidate;
 end;
 end.

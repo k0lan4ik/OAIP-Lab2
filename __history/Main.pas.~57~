@@ -3,8 +3,12 @@ unit Main;
 interface
 
 uses
+<<<<<<< Updated upstream
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
   System.Classes, Vcl.Graphics,
+=======
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+>>>>>>> Stashed changes
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, CharacterController, Vcl.ExtCtrls;
 
 type
@@ -23,16 +27,23 @@ var
 implementation
 
 {$R *.dfm}
+<<<<<<< Updated upstream
 <<<<<<<< Updated upstream:__history/Main.pas.~45~
 ========
 const
   First:TBodyPRow = ((100,200),(0,-1),(0,-1),(0,-1),(-1,1),(0,1),(1,1),(0,1),(-1,1),(0,1),(-1,0),(1,1),(0,1),(1,0));
   Second:TBodyPRow = ((100,200),(0,-1),(0,-1),(0,-1),(-1,1),(0,1),(1,-1),(1,-1),(-1,1),(0,1),(-1,0),(1,1),(0,1),(1,0));
 >>>>>>>> Stashed changes:__history/Main.pas.~57~
+=======
+const
+  First:TBodyPRow = ((100,200),(0,-1),(0,-1),(0,-1),(-1,1),(0,1),(1,1),(0,1),(-1,1),(0,1),(-1,0),(1,1),(0,1),(1,0));
+  Second:TBodyPRow = ((100,200),(0,-1),(0,-1),(0,-1),(-1,1),(0,1),(1,-1),(1,-1),(-1,1),(0,1),(-1,0),(1,1),(0,1),(1,0));
+>>>>>>> Stashed changes
 
 var
   Characer: TCharacter;
   Timer, Start: Cardinal;
+<<<<<<< Updated upstream
   Test: integer;
 
 procedure TForm2.OnCreate(Sender: TObject);
@@ -42,17 +53,27 @@ begin
   Characer := TCharacter.Create(200, 300, Form2.Canvas);
   Test := 200;
 ========
+=======
+  Scale :Real;
+
+procedure TForm2.OnCreate(Sender: TObject);
+begin
+>>>>>>> Stashed changes
 
   Start := GetTickCount;
   Characer := TCharacter.Create(Form2.Canvas);
   Characer.AddKeyFrame(First, 50, 0);
   Characer.AddKeyFrame(Second, 50, 5000);
   Scale := 1;
+<<<<<<< Updated upstream
 >>>>>>>> Stashed changes:__history/Main.pas.~57~
+=======
+>>>>>>> Stashed changes
 end;
 
 procedure TForm2.OnPaint(Sender: TObject);
 begin
+<<<<<<< Updated upstream
 <<<<<<<< Updated upstream:__history/Main.pas.~45~
   Characer.Paint(Characer.Body, Point(0, 0));
 end;
@@ -72,4 +93,15 @@ end;
       Form2.Invalidate;
 end;
 >>>>>>>> Stashed changes:__history/Main.pas.~57~
+=======
+
+     Characer.Paint(GetTickCount - Start);
+<<<<<<<< Updated upstream:__history/Main.pas.~59~
+     if GetTickCount - Start < 5000 then
+========
+     if GetTickCount - Start < 10000 then
+>>>>>>>> Stashed changes:__history/Main.pas.~57~
+      Form2.Invalidate;
+end;
+>>>>>>> Stashed changes
 end.

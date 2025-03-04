@@ -16,10 +16,17 @@ object Form2: TForm2
   TextHeight = 15
   object Timer1: TTimer
     Interval = 1
+<<<<<<< Updated upstream
+<<<<<<<< Updated upstream:__history/Main.dfm.~13~
 <<<<<<<< Updated upstream:__history/Main.dfm.~13~
     OnTimer = OnTimer
 ========
 >>>>>>>> Stashed changes:__history/Main.dfm.~14~
+========
+>>>>>>>> Stashed changes:__history/Main.dfm.~14~
+=======
+    OnTimer = OnTimer
+>>>>>>> Stashed changes
     Left = 304
     Top = 104
   end
