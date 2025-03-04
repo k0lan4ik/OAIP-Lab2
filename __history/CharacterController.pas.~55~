@@ -11,7 +11,6 @@ type
   TBodyPart = record
     Local: TPoint;
     IsHead: Boolean;
-    IsFoot: Boolean;
     Linked: array of TBodyPart; // указатель + кол частей
   end;
 
@@ -42,10 +41,6 @@ implementation
 
 constructor TCharacter.Create(const Canvas: TCanvas);
 begin
-<<<<<<< Updated upstream
-  Length := 70;
-=======
->>>>>>> Stashed changes
   self.Canvas := Canvas;
   self.Canvas.Pen.Width := 3;
   self.Canvas.Pen.Color := clBlack;
@@ -58,7 +53,7 @@ function Lerp(StartPoint, EndPoint: TPoint;
 var
   delTime: Double;
 begin
-  delTime := (Time - Start) / (Ending - Start + 1);
+  delTime := (Time - Start) / (Ending - Start);
   Result.X := Round(StartPoint.X + (EndPoint.X - StartPoint.X) * delTime);
   Result.Y := Round(StartPoint.Y + (EndPoint.Y - StartPoint.Y) * delTime);
 end;
@@ -76,7 +71,7 @@ begin
   begin
     with Linked[0] do
     begin
-      Local := CalculateEndPoint(Len,
+      Local := CalculateEndPoint(Trunc(Len * 0.5),
         Point(Parts[2, 1], Parts[2, 2]));
       SetLength(Linked, 1);
       with Linked[0] do
@@ -88,13 +83,8 @@ begin
         with Linked[0] do
         begin
           SetLength(Linked, 3);
-<<<<<<< Updated upstream
-          Linked[0].Local := CalculateEndPoint(Trunc(Length * 0.75),
-            Point(0, -1));
-=======
           Linked[0].Local := CalculateEndPoint(Trunc(Len * 0.75),
             Point(Parts[4, 1], Parts[4, 2]));
->>>>>>> Stashed changes
           Linked[0].IsHead := true;
 
           Linked[1].Local := CalculateEndPoint(Len,
@@ -127,7 +117,6 @@ begin
       with Linked[0] do
       begin
         SetLength(Linked, 1);
-        Linked[0].IsFoot := true;
         Linked[0].Local := CalculateEndPoint(Trunc(Len * 0.5),
           Point(Parts[11, 1], Parts[11, 2]));
       end;
@@ -143,47 +132,28 @@ begin
       with Linked[0] do
       begin
         SetLength(Linked, 1);
-        Linked[0].IsFoot := true;
         Linked[0].Local := CalculateEndPoint(Trunc(Len * 0.5),
           Point(Parts[14, 1], Parts[14, 2]));
       end;
     end;
   end;
-<<<<<<< Updated upstream
-  self.Canvas.Pen.Width := Round(Length*0.2);
-  self.Canvas.Pen.Color := clBlack;
-  self.Canvas.Brush.Color := clWhite;
-  self.Paint(Body, Point(0, 0));
-=======
 
->>>>>>> Stashed changes
 end;
 
 procedure TCharacter.Paint(const CurrentTime: Cardinal);
 var
   left, right, mid: Integer;
 begin
-<<<<<<< Updated upstream
-  // Вычисляем абсолютные координаты для текущей точки
-  NextAbsolute := Point(CurrentAbsolute.X + BodyPart.Local.X,
-    CurrentAbsolute.Y + BodyPart.Local.Y);
-
-  for i := 0 to High(BodyPart.Linked) do
-=======
   left := Low(self.KeyFrames) - 1;
   right := High(self.KeyFrames) + 1;
   while (left + 1 < right) do
->>>>>>> Stashed changes
   begin
     mid := (left + right) div 2;
-    if self.KeyFrames[mid].Time <= CurrentTime then
+    if self.KeyFrames[mid].Time <= Time then
       left := mid
     else
       right := mid;
   end;
-  if right > High(self.KeyFrames) then
-     right := left;
-     
   Draw(self.KeyFrames[left].Body, self.KeyFrames[right].Body,
     self.KeyFrames[left].Time, self.KeyFrames[right].Time, CurrentTime,
     Lerp(self.KeyFrames[left].Body.Local, self.KeyFrames[right].Body.Local,
@@ -192,7 +162,7 @@ end;
 
 function TCharacter.CalculateEndPoint(Length: Integer;
   const Target: TPoint): TPoint;
-{var
+var
   deltaX, deltaY, D, normX, normY: Double;
 begin
   deltaX := Target.X;
@@ -215,30 +185,6 @@ begin
   deltaY := Length * normY;
 
   Result := Point(Round(deltaX), Round(deltaY));
-end;}
-
-var
-  deltaX, deltaY, D, Ratio: Double;
-begin
-  deltaX := Target.X;
-  deltaY := Target.Y;
-
-  if (deltaX = 0) and (deltaY = 0) then
-  begin
-    Result := Point(0, 0);
-  end
-  else
-  begin
-
-    D := Sqrt(Sqr(deltaX) + Sqr(deltaY));
-
-    Ratio := Length / D;
-
-    deltaX := deltaX * Ratio;
-    deltaY := deltaY * Ratio;
-
-    Result := Point(Round(deltaX), Round(deltaY));
-  end;
 end;
 
 procedure TCharacter.Draw(const left, right: TBodyPart;const LeftT, RightT, CurT: Cardinal;
@@ -256,19 +202,16 @@ begin
       CurT, RightT));
     if left.Linked[i].IsHead then
     begin
-      R := Round(Sqrt(Sqr(BodyPart.X) + Sqr(BodyPart.Y))) * 3 div 4;
-      self.Canvas.Ellipse(CurAbs.X + BodyPart.X * 3 div 4  - R,
-        CurAbs.Y + BodyPart.Y * 3 div 4 + R, CurAbs.X + BodyPart.X * 3 div 4  + R,
-        CurAbs.Y + BodyPart.Y * 3 div 4  - R);
+      R := Round(Sqrt(Sqr(BodyPart.X) + Sqr(BodyPart.Y))) div 2;
+      self.Canvas.Ellipse(CurAbs.X + BodyPart.X div 2 - R,
+        CurAbs.Y + BodyPart.Y div 2  + R, CurAbs.X + BodyPart.X div 2  + R,
+        CurAbs.Y + BodyPart.Y div 2  - R);
     end
     else
     begin
       self.Canvas.MoveTo(CurAbs.X, CurAbs.Y);
-      if left.Linked[i].IsFoot then
-        self.Canvas.LineTo(CurAbs.X + BodyPart.X div 2,
-        CurAbs.Y  + BodyPart.Y div 2)
-      else
-        self.Canvas.LineTo(CurAbs.X + BodyPart.X,
+
+      self.Canvas.LineTo(CurAbs.X + BodyPart.X,
         CurAbs.Y + BodyPart.Y);
     end;
       NextAbsolute := Point(CurAbs.X + BodyPart.X, CurAbs.Y + BodyPart.Y); 
