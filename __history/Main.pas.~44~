@@ -8,10 +8,8 @@ uses
 
 type
   TForm2 = class(TForm)
-    Timer1: TTimer;
     procedure OnPaint(Sender: TObject);
     procedure OnCreate(Sender: TObject);
-    procedure OnTimer(Sender: TObject);
   private
     { Private declarations }
   public
@@ -24,19 +22,31 @@ var
 implementation
 
 {$R *.dfm}
+const
+  First:TBodyPRow = ((200,200),(0,-1),(0,-1),(0,-1),(-1,1),(0,1),(1,1),(0,1),(-1,1),(0,1),(-1,0),(1,1),(0,1),(1,0));
+  Second:TBodyPRow = ((200,200),(0,1),(0,-1),(0,0),(-1,0),(0,1),(0,-1),(-1,0),(1,0),(0,-1),(0,1),(0,1),(1,0),(-1,0));
+
 var
   Characer: TCharacter;
-  Buff: TBitMap;
   Timer, Start: Cardinal;
 
 procedure TForm2.OnCreate(Sender: TObject);
 begin
+
   Start := GetTickCount;
+<<<<<<<< Updated upstream:__history/Main.pas.~44~
   Characer := TCharacter.Create(200,300,Form2.Canvas);
+========
+  Characer := TCharacter.Create(Form2.Canvas);
+  Characer.AddKeyFrame(First, 50, 0);
+  Characer.AddKeyFrame(Second, 50, 5000);
+  Scale := 1;
+>>>>>>>> Stashed changes:__history/Main.pas.~61~
 end;
 
 procedure TForm2.OnPaint(Sender: TObject);
 begin
+<<<<<<<< Updated upstream:__history/Main.pas.~44~
      Characer.Paint(Characer.Body,Point(0,0));
 end;
 
@@ -48,4 +58,11 @@ begin
     Timer1.Enabled := false
 end;
 
+========
+
+     Characer.Paint(GetTickCount - Start);
+     if GetTickCount - Start < 5000 then
+      Form2.Invalidate;
+end;
+>>>>>>>> Stashed changes:__history/Main.pas.~61~
 end.

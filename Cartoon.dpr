@@ -4,7 +4,7 @@ uses
   Vcl.Forms,
   Main in 'Main.pas' {Form2},
   CharacterController in 'CharacterController.pas',
-  BackGroundController in 'BackGroundController.pas';
+  KeyFrameControl in 'KeyFrameControl.pas';
 
 {$R *.res}
 

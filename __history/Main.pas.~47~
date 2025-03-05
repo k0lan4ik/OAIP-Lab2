@@ -9,10 +9,8 @@ uses
 
 type
   TForm2 = class(TForm)
-    Timer1: TTimer;
     procedure OnPaint(Sender: TObject);
     procedure OnCreate(Sender: TObject);
-    procedure OnTimer(Sender: TObject);
   private
     { Private declarations }
   public
@@ -25,22 +23,41 @@ var
 implementation
 
 {$R *.dfm}
+<<<<<<<< Updated upstream:__history/Main.pas.~47~
 
 var
   Character: TCharacter;
   Buff: TBitMap;
+========
+const
+  First:TBodyPRow = ((50,200),(0,-1),(0,-1),(0,-1),(-1,1),(0,1),(1,1),(0,1),(-1,1),(0,1),(-1,0),(1,1),(0,1),(1,0));
+  Second:TBodyPRow = ((100,200),(0,-1),(0,-1),(0,-1),(-1,1),(0,1),(1,-1),(1,-1),(-1,1),(0,1),(-1,0),(1,1),(0,1),(1,0));
+
+var
+  Characer: TCharacter;
+>>>>>>>> Stashed changes:__history/Main.pas.~56~
   Timer, Start: Cardinal;
   Test: integer;
 
 procedure TForm2.OnCreate(Sender: TObject);
 begin
+<<<<<<<< Updated upstream:__history/Main.pas.~47~
   //Start := GetTickCount;
   Character := TCharacter.Create(200, 300, Form2.Canvas);
   Test := 0;
+========
+
+  Start := GetTickCount;
+  Characer := TCharacter.Create(Form2.Canvas);
+  Characer.AddKeyFrame(First, 50, 0);
+  Characer.AddKeyFrame(Second, 50, 5000);
+  Scale := 1;
+>>>>>>>> Stashed changes:__history/Main.pas.~56~
 end;
 
 procedure TForm2.OnPaint(Sender: TObject);
 begin
+<<<<<<<< Updated upstream:__history/Main.pas.~47~
   Character.Paint(Character.Body, Point(0, 0));
 end;
 
@@ -50,4 +67,11 @@ begin
   Inc(Test,10);
 end;
 
+========
+
+     Characer.Paint(GetTickCount - Start);
+     if GetTickCount - Start < 10000 then
+      Form2.Invalidate;
+end;
+>>>>>>>> Stashed changes:__history/Main.pas.~56~
 end.

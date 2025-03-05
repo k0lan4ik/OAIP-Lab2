@@ -15,8 +15,20 @@ object Form2: TForm2
   OnPaint = OnPaint
   TextHeight = 15
   object Timer1: TTimer
-    Interval = 100
+    Interval = 1
+<<<<<<< Updated upstream
+<<<<<<<< Updated upstream:__history/Main.dfm.~15~
+<<<<<<< Updated upstream
+<<<<<<<< Updated upstream:__history/Main.dfm.~14~
     OnTimer = OnTimer
+========
+>>>>>>>> Stashed changes:__history/Main.dfm.~15~
+=======
+>>>>>>> Stashed changes
+========
+>>>>>>>> Stashed changes:__history/Main.dfm.~14~
+=======
+>>>>>>> Stashed changes
     Left = 304
     Top = 104
   end

@@ -11,130 +11,174 @@ type
   TBodyPart = record
     Local: TPoint;
     IsHead: Boolean;
-    Linked: array of TBodyPart;
+    IsFoot: Boolean;
+    Linked: array of TBodyPart; // указатель + кол частей
   end;
+
+  TChrKeyFrame = record
+    Body: TBodyPart;
+    Len: Integer;
+    Time: Cardinal;
+  end;
+
+  TBodyPRow = array [1 .. 14, 1 .. 2] of Integer;
 
   TCharacter = class
   public
-    Body: TBodyPart;
-    Length: Integer;
+    KeyFrames: array of TChrKeyFrame;
     Canvas: TCanvas;
-    constructor Create(const X, Y: Integer; Canvas: TCanvas);
-    procedure Paint(const BodyPart: TBodyPart; const CurrentAbsolute: TPoint);
+    constructor Create(const Canvas: TCanvas);
+    procedure Paint(const CurrentTime: Cardinal);
+
+    procedure AddKeyFrame(const Parts: TBodyPRow; const Len: Integer;
+      const Time: Cardinal);
   private
+    procedure Draw(const left, right: TBodyPart;const LeftT, RightT, CurT: Cardinal;
+ const CurAbs: TPoint;const Len: Integer);
     function CalculateEndPoint(Length: Integer; const Target: TPoint): TPoint;
   end;
 
 implementation
 
-constructor TCharacter.Create(const X, Y: Integer; Canvas: TCanvas);
+constructor TCharacter.Create(const Canvas: TCanvas);
 begin
-  Length := 70;
   self.Canvas := Canvas;
-  self.Body.Local := Point(X, Y);
-  SetLength(self.Body.Linked, 3);
-  with self.Body do
+  self.Canvas.Pen.Width := 3;
+  self.Canvas.Pen.Color := clBlack;
+  self.Canvas.Brush.Color := clWhite;
+  // SetLength(self.KeyFrames, 1);
+end;
+
+function Lerp(StartPoint, EndPoint: TPoint;
+  Start, Time, Ending: Cardinal): TPoint;
+var
+  delTime: Double;
+begin
+  delTime := (Time - Start) / (Ending - Start + 1);
+  Result.X := Round(StartPoint.X + (EndPoint.X - StartPoint.X) * delTime);
+  Result.Y := Round(StartPoint.Y + (EndPoint.Y - StartPoint.Y) * delTime);
+end;
+
+procedure TCharacter.AddKeyFrame(const Parts: TBodyPRow; const Len: Integer;
+  const Time: Cardinal);
+begin
+  SetLength(self.KeyFrames, Length(self.KeyFrames) + 1);
+  self.KeyFrames[High(self.KeyFrames)].Time := Time;
+  self.KeyFrames[High(self.KeyFrames)].Len := Len;
+  self.KeyFrames[High(self.KeyFrames)].Body.Local :=
+    Point(Parts[1, 1], Parts[1, 2]);
+  SetLength(self.KeyFrames[High(self.KeyFrames)].Body.Linked, 3);
+  with self.KeyFrames[High(self.KeyFrames)].Body do
   begin
     with Linked[0] do
     begin
-      Local := CalculateEndPoint(Trunc(Length * 0.75), Point(0, -1));
+      Local := CalculateEndPoint(Len,
+        Point(Parts[2, 1], Parts[2, 2]));
       SetLength(Linked, 1);
       with Linked[0] do
       begin
-        Local := CalculateEndPoint(Trunc(Length * 0.75), Point(0, -1));
 
         SetLength(Linked, 1);
-        Linked[0].Local := CalculateEndPoint(Length, Point(0, -1));
+        Linked[0].Local := CalculateEndPoint(Len,
+          Point(Parts[3, 1], Parts[3, 2]));
         with Linked[0] do
         begin
           SetLength(Linked, 3);
-          Linked[0].Local := CalculateEndPoint(Trunc(Length * 0.75),
-            Point(0, -1));
+
+
+          Linked[0].Local := CalculateEndPoint(Trunc(Len * 0.75),
+            Point(Parts[4, 1], Parts[4, 2]));
+
+          Linked[0].Local := CalculateEndPoint(Trunc(Len * 0.75),
+            Point(Parts[4, 1], Parts[4, 2]));
+
+          Linked[0].Local := CalculateEndPoint(Trunc(Len * 0.75),
+            Point(Parts[4, 1], Parts[4, 2]));
           Linked[0].IsHead := true;
 
-          Linked[1].Local := CalculateEndPoint(Length, Point(-1, 1));
+          Linked[1].Local := CalculateEndPoint(Len,
+            Point(Parts[5, 1], Parts[5, 2]));
           with Linked[1] do
           begin
             SetLength(Linked, 1);
-            Linked[0].Local := CalculateEndPoint(Length, Point(0, 1));
+            Linked[0].Local := CalculateEndPoint(Len,
+              Point(Parts[6, 1], Parts[6, 2]));
           end;
 
-          Linked[2].Local := CalculateEndPoint(Length, Point(1, 1));
+          Linked[2].Local := CalculateEndPoint(Len,
+            Point(Parts[7, 1], Parts[7, 2]));
           with Linked[2] do
           begin
             SetLength(Linked, 1);
-            Linked[0].Local := CalculateEndPoint(Length, Point(0, 1));
+            Linked[0].Local := CalculateEndPoint(Len,
+              Point(Parts[8, 1], Parts[8, 2]));
           end;
         end;
       end;
     end;
 
-    Linked[1].Local := CalculateEndPoint(Length, Point(-1, 1));
+    Linked[1].Local := CalculateEndPoint(Len, Point(Parts[9, 1], Parts[9, 2]));
     with Linked[1] do
     begin
       SetLength(Linked, 1);
-      Linked[0].Local := CalculateEndPoint(Length, Point(0, 1));
+      Linked[0].Local := CalculateEndPoint(Len,
+        Point(Parts[10, 1], Parts[10, 2]));
       with Linked[0] do
       begin
         SetLength(Linked, 1);
-        Linked[0].Local := CalculateEndPoint(Trunc(Length * 0.5), Point(-1, 0));
+        Linked[0].IsFoot := true;
+        Linked[0].Local := CalculateEndPoint(Trunc(Len * 0.5),
+          Point(Parts[11, 1], Parts[11, 2]));
       end;
     end;
 
-    Linked[2].Local := CalculateEndPoint(Length, Point(1, 1));
+    Linked[2].Local := CalculateEndPoint(Len,
+      Point(Parts[12, 1], Parts[12, 2]));
     with Linked[2] do
     begin
       SetLength(Linked, 1);
-      Linked[0].Local := CalculateEndPoint(Length, Point(0, 1));
+      Linked[0].Local := CalculateEndPoint(Len,
+        Point(Parts[13, 1], Parts[13, 2]));
       with Linked[0] do
       begin
         SetLength(Linked, 1);
-        Linked[0].Local := CalculateEndPoint(Trunc(Length * 0.5), Point(1, 0));
+        Linked[0].IsFoot := true;
+        Linked[0].Local := CalculateEndPoint(Trunc(Len * 0.5),
+          Point(Parts[14, 1], Parts[14, 2]));
       end;
     end;
   end;
-  self.Canvas.Pen.Width := Round(Length*0.2);
-  self.Canvas.Pen.Color := clBlack;
-  self.Canvas.Brush.Color := clWhite;
-  self.Paint(Body, Point(0, 0));
+
 end;
 
-procedure TCharacter.Paint(const BodyPart: TBodyPart;
-  const CurrentAbsolute: TPoint);
+procedure TCharacter.Paint(const CurrentTime: Cardinal);
 var
-  i, R: Integer;
-  NextAbsolute: TPoint;
+  left, right, mid: Integer;
 begin
-  // Вычисляем абсолютные координаты для текущей точки
-  NextAbsolute := Point(CurrentAbsolute.X + BodyPart.Local.X,
-    CurrentAbsolute.Y + BodyPart.Local.Y);
 
-  for i := 0 to High(BodyPart.Linked) do
+  left := Low(self.KeyFrames) - 1;
+  right := High(self.KeyFrames) + 1;
+  while (left + 1 < right) do
+
   begin
-
-    if BodyPart.Linked[i].IsHead then
-    begin
-      R := Round(Sqrt(Sqr(BodyPart.Linked[i].Local.X) +
-        Sqr(BodyPart.Linked[i].Local.Y)));
-      Canvas.Ellipse(NextAbsolute.X + BodyPart.Linked[i].Local.X - R,
-        NextAbsolute.Y + BodyPart.Linked[i].Local.Y + R,
-        NextAbsolute.X + BodyPart.Linked[i].Local.X + R,
-        NextAbsolute.Y + BodyPart.Linked[i].Local.Y - R);
-    end
+    mid := (left + right) div 2;
+    if self.KeyFrames[mid].Time <= CurrentTime then
+      left := mid
     else
-    begin
-      Canvas.MoveTo(NextAbsolute.X, NextAbsolute.Y);
-
-      Canvas.LineTo(NextAbsolute.X + BodyPart.Linked[i].Local.X,
-        NextAbsolute.Y + BodyPart.Linked[i].Local.Y);
-    end;
-    Paint(BodyPart.Linked[i], NextAbsolute);
+      right := mid;
   end;
+  if right > High(self.KeyFrames) then
+     right := left;
+     
+  Draw(self.KeyFrames[left].Body, self.KeyFrames[right].Body,
+    self.KeyFrames[left].Time, self.KeyFrames[right].Time, CurrentTime,
+    Lerp(self.KeyFrames[left].Body.Local, self.KeyFrames[right].Body.Local,
+    self.KeyFrames[left].Time,CurrentTime, self.KeyFrames[right].Time), self.KeyFrames[left].Len);
 end;
 
 function TCharacter.CalculateEndPoint(Length: Integer;
   const Target: TPoint): TPoint;
-{var
+var
   deltaX, deltaY, D, normX, normY: Double;
 begin
   deltaX := Target.X;
@@ -157,30 +201,40 @@ begin
   deltaY := Length * normY;
 
   Result := Point(Round(deltaX), Round(deltaY));
-end;}
-
-var
-  deltaX, deltaY, D, Ratio: Double;
-begin
-  deltaX := Target.X;
-  deltaY := Target.Y;
-
-  if (deltaX = 0) and (deltaY = 0) then
-  begin
-    Result := Point(0, 0);
-  end
-  else
-  begin
-
-    D := Sqrt(Sqr(deltaX) + Sqr(deltaY));
-
-    Ratio := Length / D;
-
-    deltaX := deltaX * Ratio;
-    deltaY := deltaY * Ratio;
-
-    Result := Point(Round(deltaX), Round(deltaY));
-  end;
 end;
 
+procedure TCharacter.Draw(const left, right: TBodyPart;const LeftT, RightT, CurT: Cardinal;
+ const CurAbs: TPoint;const Len: Integer);
+var
+  i, R: Integer;
+  NextAbsolute, BodyPart: TPoint;
+begin
+
+
+
+  for i := 0 to High(left.Linked) do
+  begin
+    BodyPart := self.CalculateEndPoint(Len, Lerp(left.Linked[i].Local, right.Linked[i].Local, LeftT,
+      CurT, RightT));
+    if left.Linked[i].IsHead then
+    begin
+      R := Round(Sqrt(Sqr(BodyPart.X) + Sqr(BodyPart.Y))) * 3 div 4;
+      self.Canvas.Ellipse(CurAbs.X + BodyPart.X * 3 div 4  - R,
+        CurAbs.Y + BodyPart.Y * 3 div 4 + R, CurAbs.X + BodyPart.X * 3 div 4  + R,
+        CurAbs.Y + BodyPart.Y * 3 div 4  - R);
+    end
+    else
+    begin
+      self.Canvas.MoveTo(CurAbs.X, CurAbs.Y);
+      if left.Linked[i].IsFoot then
+        self.Canvas.LineTo(CurAbs.X + BodyPart.X div 2,
+        CurAbs.Y  + BodyPart.Y div 2)
+      else
+        self.Canvas.LineTo(CurAbs.X + BodyPart.X,
+        CurAbs.Y + BodyPart.Y);
+    end;
+      NextAbsolute := Point(CurAbs.X + BodyPart.X, CurAbs.Y + BodyPart.Y);
+    Draw(left.Linked[i], right.Linked[i], LeftT, RightT, CurT, NextAbsolute, Len);
+  end;
+end;
 end.
