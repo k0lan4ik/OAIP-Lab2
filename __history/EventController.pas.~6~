@@ -1,0 +1,17 @@
+unit EventController;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, CharacterController, Vcl.ExtCtrls;
+type
+  TDrawObject = class
+    //procedure (); virtual; abstract;
+    procedure Draw(); virtual; abstract;
+  end;
+  TObjects = 1..2;
+
+implementation
+
+end.
