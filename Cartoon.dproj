@@ -127,6 +127,7 @@
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="CharacterController.pas"/>
+        <DCCReference Include="BackGroundController.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

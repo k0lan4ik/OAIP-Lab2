@@ -3,7 +3,8 @@ program Cartoon;
 uses
   Vcl.Forms,
   Main in 'Main.pas' {Form2},
-  CharacterController in 'CharacterController.pas';
+  CharacterController in 'CharacterController.pas',
+  BackGroundController in 'BackGroundController.pas';
 
 {$R *.res}
 
