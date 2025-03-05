@@ -25,8 +25,9 @@ implementation
 {$R *.dfm}
 const
   First:TBodyPRow = ((200,200),(0,-1),(0,-1),(0,-1),(-1,1),(0,1),(1,1),(0,1),(-1,1),(0,1),(-1,0),(1,1),(0,1),(1,0));
-  Second:TBodyPRow = ((300,200),(0,-1),(0,-1),(0,-1),(-1,1),(0,1),(1,-1),(1,-1),(-1,1),(0,1),(-1,0),(1,1),(0,1),(1,0));
-  Tri:TBodyPRow = ((300,200),(0,1),(0,-1),(0,0),(-1,0),(0,1),(0,-1),(-1,0),(1,0),(0,-1),(0,1),(0,1),(1,0),(-1,0));
+  Second:TBodyPRow = ((300,200),(0,-1),(0,-1),(0,-1),(-1,1),(0,1),(1,-1),(0,-1),(-1,1),(0,1),(-1,0),(1,1),(0,1),(1,0));
+  Secon:TBodyPRow = ((300,200),(0,-1),(0,-1),(0,-1),(-1,1),(0,1),(1,0),(1,0),(-1,1),(0,1),(-1,0),(1,1),(0,1),(1,0));
+  Tri:TBodyPRow = ((300,200),(0,-1),(0,-1),(0,-1),(-1,1),(0,1),(1,1),(0,1),(-1,1),(0,1),(-1,0),(1,1),(0,1),(1,0));
 
 
 var
@@ -40,17 +41,22 @@ begin
   Start := GetTickCount;
   Characer := TCharacter.Create(Form2.Canvas);
   Characer.AddKeyFrame(First, 50, 0);
-  Characer.AddKeyFrame(Second, 50, 2500);
-  Characer.AddKeyFrame(Second, 50, 3000);
-  Characer.AddKeyFrame(Tri, 50, 5000);
-  Scale := 1;
+  Characer.AddKeyFrame(Secon, 50, 1000);
+  Characer.AddKeyFrame(Second, 50, 2000);
+  Characer.AddKeyFrame(Secon, 50, 3000);
+  Characer.AddKeyFrame(Second, 50, 4000);
+  Characer.AddKeyFrame(Secon, 50, 5000);
+  Characer.AddKeyFrame(Second, 50, 6000);
+  Characer.AddKeyFrame(Secon, 50, 7000);
+  Characer.AddKeyFrame(Second, 50, 8000);
+  Characer.AddKeyFrame(Secon, 50, 9000);
 end;
 
 procedure TForm2.OnPaint(Sender: TObject);
 begin
 
   Characer.Paint(GetTickCount - Start);
-  if GetTickCount - Start < 5000 then
+  if GetTickCount - Start < 9000 then
     Form2.Invalidate;
 end;
 
