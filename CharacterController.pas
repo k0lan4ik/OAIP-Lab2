@@ -39,12 +39,15 @@ type
 
     procedure AddKeyFrame(const Parts: TBodyPRow; const Len: Integer;
       const Time: Cardinal);
-    destructor Destroy();override;
+    procedure AddLoopFrame(const Parts: array of TBodyPRow;
+      const Lens: array of Integer; const delTimes: array of Cardinal;
+       StartTime: Cardinal;const Count: Integer);
+    destructor Destroy(); override;
   private
     procedure FreeFrame(FrameForFree: TChrKeyFrameAdr);
     procedure Draw(const left, right: TBodyPart;
       const LeftT, RightT, CurT: Cardinal; const CurAbs: TPoint;
-      const LLen, RLen: Integer; Canvas:  TCanvas);
+      const LLen, RLen: Integer; Canvas: TCanvas);
     function CalculateEndPoint(Length: Integer; const Target: TPoint): TPoint;
   end;
 
@@ -66,6 +69,25 @@ begin
   delTime := (Time - Start) / (Ending - Start + 1);
   Result.X := Round(StartPoint.X + (EndPoint.X - StartPoint.X) * delTime);
   Result.Y := Round(StartPoint.Y + (EndPoint.Y - StartPoint.Y) * delTime);
+end;
+
+procedure TCharacter.AddLoopFrame(const Parts: array of TBodyPRow;
+  const Lens: array of Integer; const delTimes: array of Cardinal;
+  StartTime: Cardinal;const Count: Integer);
+var
+  i, j: Integer;
+begin
+  for i := 1 to Count do
+  begin
+     j := Low(Parts);
+     While j <= High(Parts) do
+     begin
+      self.AddKeyFrame(Parts[j],Lens[j],delTimes[j]+StartTime);
+      Inc(j);
+     end;
+     Dec(j);
+     StartTime := StartTime + delTimes[j];
+  end;
 end;
 
 procedure TCharacter.AddKeyFrame(const Parts: TBodyPRow; const Len: Integer;
@@ -191,8 +213,9 @@ begin
   end;
   if right <> nil then
     Draw(left.Inf.Body, right.Inf.Body, left.Inf.Time, right.Inf.Time,
-    CurrentTime, Lerp(left.Inf.Body.Local, right.Inf.Body.Local, left.Inf.Time,
-    CurrentTime, right.Inf.Time), left.Inf.Len,right.Inf.Len,Canvas);
+      CurrentTime, Lerp(left.Inf.Body.Local, right.Inf.Body.Local,
+      left.Inf.Time, CurrentTime, right.Inf.Time), left.Inf.Len,
+      right.Inf.Len, Canvas);
 end;
 
 function TCharacter.CalculateEndPoint(Length: Integer;
@@ -245,29 +268,26 @@ begin
     begin
       Canvas.MoveTo(CurAbs.X, CurAbs.Y);
       if left.Linked[i].IsFoot then
-        Canvas.LineTo(CurAbs.X + BodyPart.X div 2,
-          CurAbs.Y + BodyPart.Y div 2)
+        Canvas.LineTo(CurAbs.X + BodyPart.X div 2, CurAbs.Y + BodyPart.Y div 2)
       else
         Canvas.LineTo(CurAbs.X + BodyPart.X, CurAbs.Y + BodyPart.Y);
     end;
     NextAbsolute := Point(CurAbs.X + BodyPart.X, CurAbs.Y + BodyPart.Y);
-    Draw(left.Linked[i], right.Linked[i], LeftT, RightT, CurT,
-      NextAbsolute, LLen, RLen,Canvas);
+    Draw(left.Linked[i], right.Linked[i], LeftT, RightT, CurT, NextAbsolute,
+      LLen, RLen, Canvas);
   end;
 end;
 
 procedure TCharacter.FreeFrame(FrameForFree: TChrKeyFrameAdr);
 begin
-   if FrameForFree^.Adr  <> nil then
+  if FrameForFree^.Adr <> nil then
     FreeFrame(FrameForFree^.Adr);
-   Dispose(FrameForFree);
+  Dispose(FrameForFree);
 end;
 
 destructor TCharacter.Destroy();
 begin
-    FreeFrame(KeyFrames);
+  FreeFrame(KeyFrames);
 end;
-
-
 
 end.

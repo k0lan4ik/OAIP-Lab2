@@ -73,14 +73,7 @@ begin
     200, clBlack, clLime)], 14000);
   Characer := TCharacter.Create();
   Characer.AddKeyFrame(First, 50, 0);
-  Characer.AddKeyFrame(Secon, 50, 1000);
-  Characer.AddKeyFrame(Second, 50, 2000);
-  Characer.AddKeyFrame(Secon, 50, 3000);
-  Characer.AddKeyFrame(Second, 50, 4000);
-  Characer.AddKeyFrame(Secon, 50, 5000);
-  Characer.AddKeyFrame(Second, 50, 6000);
-  Characer.AddKeyFrame(Secon, 50, 7000);
-  Characer.AddKeyFrame(Second, 50, 8000);
+  Characer.AddLoopFrame([Secon,Second],[50,50],[1000,2000],0,4);
   Characer.AddKeyFrame(Secon, 50, 9000);
   Characer.AddKeyFrame(Tri, 50, 10000);
   Characer.AddKeyFrame(chetiri, 100, 12001);
