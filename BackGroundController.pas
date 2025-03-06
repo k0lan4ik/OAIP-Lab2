@@ -61,7 +61,7 @@ type
   public
     BcgFrames: TBcgKeyFrameAdr;
     constructor Create();
-    procedure Paint(const CurrentTime: Cardinal; Canvas:TCanvas); override;
+    procedure Paint(const CurrentTime: Cardinal; Canvas: TCanvas); override;
     procedure AddKeyFrame(const rec: array of TRectangle;
       ell: array of TEllipse; line: array of TLine; const Time: Cardinal);
     destructor Destroy(); override;
@@ -143,10 +143,11 @@ begin
   self.BcgFrames^.Adr := nil;
 end;
 
-procedure TBackGround.Paint(const CurrentTime: Cardinal; Canvas:TCanvas);
+procedure TBackGround.Paint(const CurrentTime: Cardinal; Canvas: TCanvas);
 var
   left, right, mid: TBcgKeyFrameAdr;
   Steps: integer;
+  P1, P2: TPoint;
 begin
 
   left := self.BcgFrames;
@@ -169,21 +170,56 @@ begin
       right := mid;
   end;
   if right <> nil then
-    with left.Inf do
+  begin
+
     begin
-      for Steps := Low(Rectangles) to High(Rectangles) do
+      for Steps := Low(left.Inf.Rectangles) to High(left.Inf.Rectangles) do
       begin
-        Rectangles[Steps].Draw(Canvas);
+        P1 := Lerp(Point(left.Inf.Rectangles[Steps].Xpoint1,
+          left.Inf.Rectangles[Steps].Ypoint1),
+          Point(right.Inf.Rectangles[Steps].Xpoint1,
+          right.Inf.Rectangles[Steps].Ypoint1), left.Inf.Time, CurrentTime,
+          right.Inf.Time);
+        P2 := Lerp(Point(left.Inf.Rectangles[Steps].Xpoint2,
+          left.Inf.Rectangles[Steps].Ypoint2),
+          Point(right.Inf.Rectangles[Steps].Xpoint2,
+          right.Inf.Rectangles[Steps].Ypoint2), left.Inf.Time, CurrentTime,
+          right.Inf.Time);
+        TRectangle.Create(P1.X, P1.Y, P2.X, P2.Y,
+          left.Inf.Rectangles[Steps].PColor, left.Inf.Rectangles[Steps].BColor)
+          .Draw(Canvas);
       end;
-      for Steps := Low(Ellipses) to High(Ellipses) do
+      for Steps := Low(left.Inf.Ellipses) to High(left.Inf.Ellipses) do
       begin
-        Ellipses[Steps].Draw(Canvas);
+        P1 := Lerp(Point(left.Inf.Ellipses[Steps].Xpoint1,
+          left.Inf.Ellipses[Steps].Ypoint1),
+          Point(right.Inf.Ellipses[Steps].Xpoint1,
+          right.Inf.Ellipses[Steps].Ypoint1), left.Inf.Time, CurrentTime,
+          right.Inf.Time);
+        P2 := Lerp(Point(left.Inf.Ellipses[Steps].Xpoint2,
+          left.Inf.Ellipses[Steps].Ypoint2),
+          Point(right.Inf.Ellipses[Steps].Xpoint2,
+          right.Inf.Ellipses[Steps].Ypoint2), left.Inf.Time, CurrentTime,
+          right.Inf.Time);
+        TEllipse.Create(P1.X, P1.Y, P2.X, P2.Y, left.Inf.Ellipses[Steps].PColor,
+          left.Inf.Ellipses[Steps].BColor).Draw(Canvas);
       end;
-      for Steps := Low(Lines) to High(Lines) do
+      for Steps := Low(left.Inf.Lines) to High(left.Inf.Lines) do
       begin
-        Lines[Steps].Draw(Canvas);
+        P1 := Lerp(Point(left.Inf.Lines[Steps].Xpoint1,
+          left.Inf.Lines[Steps].Ypoint1), Point(right.Inf.Lines[Steps].Xpoint1,
+          right.Inf.Lines[Steps].Ypoint1), left.Inf.Time, CurrentTime,
+          right.Inf.Time);
+        P2 := Lerp(Point(left.Inf.Lines[Steps].Xpoint2,
+          left.Inf.Lines[Steps].Ypoint2), Point(right.Inf.Lines[Steps].Xpoint2,
+          right.Inf.Lines[Steps].Ypoint2), left.Inf.Time, CurrentTime,
+          right.Inf.Time);
+        TLine.Create(P1.X, P1.Y, P2.X, P2.Y, left.Inf.Lines[Steps].PColor,
+          left.Inf.Lines[Steps].BColor).Draw(Canvas);
       end;
+
     end;
+  end;
 end;
 
 procedure TBackGround.FreeFrame(FrameForFree: TBcgKeyFrameAdr);

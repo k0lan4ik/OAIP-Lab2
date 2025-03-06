@@ -13,6 +13,10 @@ type
   public
     procedure Paint(const CurrentTime: Cardinal; Canvas:TCanvas); virtual; abstract;
     procedure AddKeyFrame(); virtual; abstract;
+    function Lerp(StartPoint, EndPoint: TPoint;
+  Start, Time, Ending: Cardinal): TPoint;
+  private
+
   end;
 
   TDrawObjectAdr = ^TDrawObjects;
@@ -37,6 +41,16 @@ type
 implementation
 
 uses CharacterController;
+
+function TDrawObject.Lerp(StartPoint, EndPoint: TPoint;
+  Start, Time, Ending: Cardinal): TPoint;
+var
+  delTime: Double;
+begin
+  delTime := (Time - Start) / (Ending - Start + 1);
+  Result.X := Round(StartPoint.X + (EndPoint.X - StartPoint.X) * delTime);
+  Result.Y := Round(StartPoint.Y + (EndPoint.Y - StartPoint.Y) * delTime);
+end;
 
 constructor TDrawer.Create(Time, Length: Cardinal);
 begin

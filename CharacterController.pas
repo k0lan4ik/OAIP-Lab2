@@ -61,16 +61,6 @@ begin
   // SetLength(self.KeyFrames, 1);
 end;
 
-function Lerp(StartPoint, EndPoint: TPoint;
-  Start, Time, Ending: Cardinal): TPoint;
-var
-  delTime: Double;
-begin
-  delTime := (Time - Start) / (Ending - Start + 1);
-  Result.X := Round(StartPoint.X + (EndPoint.X - StartPoint.X) * delTime);
-  Result.Y := Round(StartPoint.Y + (EndPoint.Y - StartPoint.Y) * delTime);
-end;
-
 procedure TCharacter.AddLoopFrame(Parts: array of TBodyPRow;
   const Lens: array of Integer; const delTimes: array of Cardinal;
   StartTime: Cardinal;const Count: Integer);
@@ -217,7 +207,7 @@ begin
   end;
   if right <> nil then
     Draw(left.Inf.Body, right.Inf.Body, left.Inf.Time, right.Inf.Time,
-      CurrentTime, Lerp(left.Inf.Body.Local, right.Inf.Body.Local,
+      CurrentTime, self.Lerp(left.Inf.Body.Local, right.Inf.Body.Local,
       left.Inf.Time, CurrentTime, right.Inf.Time), left.Inf.Len,
       right.Inf.Len, Canvas);
 end;

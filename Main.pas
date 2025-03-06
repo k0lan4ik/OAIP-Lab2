@@ -11,7 +11,6 @@ uses
 
 type
   TForm2 = class(TForm)
-    PaintArea: TPaintBox;
     procedure OnPaint(Sender: TObject);
     procedure OnCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
@@ -61,7 +60,7 @@ begin
     TRectangle.Create(300, 250, 450, 400, clBlack, clAqua)], [],
     [TLine.Create(0, 200, 250, 50, clBlack, clLime), TLine.Create(250, 50, 500,
     200, clBlack, clLime)], 0);
-  bg.AddKeyFrame([TRectangle.Create(0, 200, 500, 490, clBlack, clRed),
+  bg.AddKeyFrame([TRectangle.Create(20, 200, 520, 490, clBlack, clRed),
     TRectangle.Create(70, 230, 200, 490, clBlack, clMaroon),
     TRectangle.Create(300, 250, 450, 400, clBlack, clAqua)], [],
     [TLine.Create(0, 200, 250, 50, clBlack, clLime), TLine.Create(250, 50, 500,
@@ -71,7 +70,7 @@ begin
     TRectangle.Create(300, 250, 450, 400, clBlack, clAqua)], [],
     [TLine.Create(0, 200, 250, 50, clBlack, clLime), TLine.Create(250, 50, 500,
     200, clBlack, clLime)], 7000);
-  bg.AddKeyFrame([TRectangle.Create(0, 200, 500, 490, clBlack, clTeal),
+  bg.AddKeyFrame([TRectangle.Create(20, 200, 520, 490, clBlack, clTeal),
     TRectangle.Create(70, 230, 200, 490, clBlack, clMaroon),
     TRectangle.Create(300, 250, 450, 400, clBlack, clAqua)], [],
     [TLine.Create(0, 200, 250, 50, clBlack, clLime), TLine.Create(250, 50, 500,

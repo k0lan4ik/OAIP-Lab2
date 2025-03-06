@@ -17,10 +17,4 @@ object Form2: TForm2
   OnDestroy = FormDestroy
   OnPaint = OnPaint
   TextHeight = 15
-  object PaintArea: TPaintBox
-    Left = 24
-    Top = 40
-    Width = 329
-    Height = 321
-  end
 end
