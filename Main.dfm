@@ -11,7 +11,16 @@ object Form2: TForm2
   Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
+  Position = poScreenCenter
+  WindowState = wsMaximized
   OnCreate = OnCreate
+  OnDestroy = FormDestroy
   OnPaint = OnPaint
   TextHeight = 15
+  object PaintArea: TPaintBox
+    Left = 24
+    Top = 40
+    Width = 329
+    Height = 321
+  end
 end
