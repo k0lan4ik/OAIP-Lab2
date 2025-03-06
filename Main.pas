@@ -54,7 +54,7 @@ end;
 procedure TForm2.OnCreate(Sender: TObject);
 
 begin
-  Driver := TDrawer.Create(GetTickCount, 12000);
+  Driver := TDrawer.Create(GetTickCount, 15000);
   bg := TBackGround.Create();
   bg.AddKeyFrame([TRectangle.Create(0, 200, 500, 490, clBlack, clLime),
     TRectangle.Create(70, 230, 200, 490, clBlack, clMaroon),
@@ -70,13 +70,18 @@ begin
     TRectangle.Create(70, 230, 200, 490, clBlack, clMaroon),
     TRectangle.Create(300, 250, 450, 400, clBlack, clAqua)], [],
     [TLine.Create(0, 200, 250, 50, clBlack, clLime), TLine.Create(250, 50, 500,
-    200, clBlack, clLime)], 14000);
+    200, clBlack, clLime)], 7000);
+  bg.AddKeyFrame([TRectangle.Create(0, 200, 500, 490, clBlack, clTeal),
+    TRectangle.Create(70, 230, 200, 490, clBlack, clMaroon),
+    TRectangle.Create(300, 250, 450, 400, clBlack, clAqua)], [],
+    [TLine.Create(0, 200, 250, 50, clBlack, clLime), TLine.Create(250, 50, 500,
+    200, clBlack, clLime)], 15001);
   Characer := TCharacter.Create();
-  Characer.AddKeyFrame(First, 50, 0);
-  Characer.AddLoopFrame([Secon,Second],[50,50],[1000,2000],0,4);
-  Characer.AddKeyFrame(Secon, 50, 9000);
-  Characer.AddKeyFrame(Tri, 50, 10000);
-  Characer.AddKeyFrame(chetiri, 100, 12001);
+  Characer.AddLoopFrame([First,Secon],[50,50],[1000,2000],0,2);
+  Characer.AddLoopFrame([Secon,Second],[50,50],[1000,2000],4000,4);
+  Characer.AddKeyFrame(Secon, 50, 13000);
+  Characer.AddKeyFrame(Tri, 50, 14000);
+  Characer.AddKeyFrame(chetiri, 100, 15001);
   Driver.AddDrawObj(bg);
   Driver.AddDrawObj(Characer);
 end;

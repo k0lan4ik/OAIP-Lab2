@@ -39,7 +39,7 @@ type
 
     procedure AddKeyFrame(const Parts: TBodyPRow; const Len: Integer;
       const Time: Cardinal);
-    procedure AddLoopFrame(const Parts: array of TBodyPRow;
+    procedure AddLoopFrame(Parts: array of TBodyPRow;
       const Lens: array of Integer; const delTimes: array of Cardinal;
        StartTime: Cardinal;const Count: Integer);
     destructor Destroy(); override;
@@ -71,18 +71,22 @@ begin
   Result.Y := Round(StartPoint.Y + (EndPoint.Y - StartPoint.Y) * delTime);
 end;
 
-procedure TCharacter.AddLoopFrame(const Parts: array of TBodyPRow;
+procedure TCharacter.AddLoopFrame(Parts: array of TBodyPRow;
   const Lens: array of Integer; const delTimes: array of Cardinal;
   StartTime: Cardinal;const Count: Integer);
 var
   i, j: Integer;
+  del: TPoint;
 begin
+  del := Point(Parts[High(Parts)][1][1] - Parts[Low(Parts)][1][1], Parts[High(Parts)][1][2] - Parts[Low(Parts)][1][2]);
   for i := 1 to Count do
   begin
      j := Low(Parts);
      While j <= High(Parts) do
      begin
       self.AddKeyFrame(Parts[j],Lens[j],delTimes[j]+StartTime);
+      Inc(Parts[j][1][1],del.X);
+      Inc(Parts[j][1][2],del.Y);
       Inc(j);
      end;
      Dec(j);

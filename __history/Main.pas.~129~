@@ -11,6 +11,7 @@ uses
 
 type
   TForm2 = class(TForm)
+    PaintArea: TPaintBox;
     procedure OnPaint(Sender: TObject);
     procedure OnCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
@@ -42,7 +43,7 @@ const
 var
   Characer: TCharacter;
   bg: TBackGround;
-  Start: Cardinal;
+  Driver: TDrawer;
 
 procedure TForm2.FormDestroy(Sender: TObject);
 begin
@@ -53,9 +54,8 @@ end;
 procedure TForm2.OnCreate(Sender: TObject);
 
 begin
-  Start := GetTickCount;
-
-  bg := TBackGround.Create(Form2.Canvas);
+  Driver := TDrawer.Create(GetTickCount, 12000);
+  bg := TBackGround.Create();
   bg.AddKeyFrame([TRectangle.Create(0, 200, 500, 490, clBlack, clLime),
     TRectangle.Create(70, 230, 200, 490, clBlack, clMaroon),
     TRectangle.Create(300, 250, 450, 400, clBlack, clAqua)], [],
@@ -70,31 +70,22 @@ begin
     TRectangle.Create(70, 230, 200, 490, clBlack, clMaroon),
     TRectangle.Create(300, 250, 450, 400, clBlack, clAqua)], [],
     [TLine.Create(0, 200, 250, 50, clBlack, clLime), TLine.Create(250, 50, 500,
-    200, clBlack, clLime)], 5000);
-  Characer := TCharacter.Create(Form2.Canvas);
+    200, clBlack, clLime)], 14000);
+  Characer := TCharacter.Create();
   Characer.AddKeyFrame(First, 50, 0);
-  Characer.AddKeyFrame(Secon, 50, 1000);
-  Characer.AddKeyFrame(Second, 50, 2000);
-  Characer.AddKeyFrame(Secon, 50, 3000);
-  Characer.AddKeyFrame(Second, 50, 4000);
-  Characer.AddKeyFrame(Secon, 50, 5000);
-  Characer.AddKeyFrame(Second, 50, 6000);
-  Characer.AddKeyFrame(Secon, 50, 7000);
-  Characer.AddKeyFrame(Second, 50, 8000);
+  Characer.AddLoopFrame([Secon,Second],[50,50],[1000,2000],0,4);
   Characer.AddKeyFrame(Secon, 50, 9000);
   Characer.AddKeyFrame(Tri, 50, 10000);
-  Characer.AddKeyFrame(chetiri, 100, 12000);
+  Characer.AddKeyFrame(chetiri, 100, 12001);
+  Driver.AddDrawObj(bg);
+  Driver.AddDrawObj(Characer);
 end;
 
 procedure TForm2.OnPaint(Sender: TObject);
 var
   CurTime: Cardinal;
 begin
-  CurTime := GetTickCount - Start;
-  bg.Paint(CurTime);
-  Characer.Paint(CurTime);
-  if CurTime < 12000 then
-    Form2.Invalidate;
+  Driver.DrawFrame(Form2, Form2.Canvas);
 end;
 
 end.
