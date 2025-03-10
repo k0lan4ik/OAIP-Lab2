@@ -208,7 +208,7 @@ begin
     else
       right := mid;
   end;
-  if right <> nil then
+  if (right <> nil) and (BcgFrames <> left) then
   begin
 
     begin

@@ -11,10 +11,11 @@ type
   TDrawObject = class
     // procedure (); virtual; abstract;
   public
-    procedure Paint(const CurrentTime: Cardinal; Canvas:TCanvas); virtual; abstract;
+    procedure Paint(const CurrentTime: Cardinal; Canvas: TCanvas);
+      virtual; abstract;
     procedure AddKeyFrame(); virtual; abstract;
     function Lerp(StartPoint, EndPoint: TPoint;
-  Start, Time, Ending: Cardinal): TPoint;
+      Start, Time, Ending: Cardinal): TPoint;
   private
 
   end;
@@ -32,11 +33,11 @@ type
     StartTime: Cardinal;
     LengthTime: Cardinal;
     constructor Create(Time, Length: Cardinal);
-    procedure DrawFrame(Sender: TWinControl; Canvas:TCanvas);
-    procedure AddDrawObj(Obj :TDrawObject);
+    procedure DrawFrame(Sender: TWinControl; Canvas: TCanvas);
+    procedure AddDrawObj(Obj: TDrawObject);
     destructor Destroy; override;
   private
-    procedure Draw(CurTime:Cardinal; Adr :TDrawObjectAdr; Canvas:TCanvas);
+    procedure Draw(CurTime: Cardinal; Adr: TDrawObjectAdr; Canvas: TCanvas);
     procedure Clear(Adr: TDrawObjectAdr);
   end;
 
@@ -62,7 +63,7 @@ begin
   self.DrawObjects^.Adr := nil;
 end;
 
-procedure TDrawer.AddDrawObj(Obj :TDrawObject);
+procedure TDrawer.AddDrawObj(Obj: TDrawObject);
 var
   temp: TDrawObjectAdr;
 begin
@@ -77,21 +78,21 @@ begin
   temp^.Inf := Obj;
 end;
 
-procedure TDrawer.Draw(CurTime:Cardinal; Adr :TDrawObjectAdr; Canvas: TCanvas);
+procedure TDrawer.Draw(CurTime: Cardinal; Adr: TDrawObjectAdr; Canvas: TCanvas);
 begin
-    Adr.Inf.Paint(CurTime, Canvas);
-    if Adr.Adr <> nil then
-      Draw(CurTime, Adr.Adr, Canvas);
+  Adr.Inf.Paint(CurTime, Canvas);
+  if Adr.Adr <> nil then
+    Draw(CurTime, Adr.Adr, Canvas);
 end;
 
-procedure TDrawer.DrawFrame(Sender: TWinControl; Canvas:TCanvas);
+procedure TDrawer.DrawFrame(Sender: TWinControl; Canvas: TCanvas);
 var
   CurTime: Cardinal;
   i: Integer;
 begin
   CurTime := GetTickCount - StartTime;
-  Draw(CurTime,DrawObjects.Adr, Canvas);
-  if CurTime <  LengthTime then
+  Draw(CurTime, DrawObjects.Adr, Canvas);
+  if CurTime < LengthTime then
     Sender.Invalidate;
 end;
 
@@ -107,7 +108,5 @@ destructor TDrawer.Destroy;
 begin
   Clear(DrawObjects);
 end;
-
-
 
 end.

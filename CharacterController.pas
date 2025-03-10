@@ -202,13 +202,14 @@ begin
     mid := left;
     Steps := Steps div 2;
     for i := 0 to Steps do
+      if mid <> nil then
       mid := mid^.Adr;
     if ((mid <> nil) and (mid^.Inf.Time <= CurrentTime)) then
       left := mid
     else
       right := mid;
   end;
-  if right <> nil then
+  if (right <> nil) and (KeyFrames <> left) then
     Draw(left.Inf.Body, right.Inf.Body, left.Inf.Time, right.Inf.Time,
       CurrentTime, self.Lerp(left.Inf.Body.Local, right.Inf.Body.Local,
       left.Inf.Time, CurrentTime, right.Inf.Time), left.Inf.Len,
@@ -250,6 +251,7 @@ var
   NextAbsolute, BodyPart: TPoint;
 begin
   Len := Round(LLen + (RLen - LLen) * (CurT - LeftT) / (RightT - LeftT + 1));
+  Canvas.Pen.Width := Len div 5;
   for i := 0 to High(left.Linked) do
   begin
     BodyPart := self.CalculateEndPoint(Len, Lerp(left.Linked[i].Local,
