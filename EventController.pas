@@ -34,8 +34,10 @@ type
     constructor Create(Time, Length: Cardinal);
     procedure DrawFrame(Sender: TWinControl; Canvas:TCanvas);
     procedure AddDrawObj(Obj :TDrawObject);
+    destructor Destroy; override;
   private
     procedure Draw(CurTime:Cardinal; Adr :TDrawObjectAdr; Canvas:TCanvas);
+    procedure Clear(Adr: TDrawObjectAdr);
   end;
 
 implementation
@@ -92,5 +94,20 @@ begin
   if CurTime <  LengthTime then
     Sender.Invalidate;
 end;
+
+procedure TDrawer.Clear(Adr: TDrawObjectAdr);
+begin
+  if Adr.Adr <> nil then
+    Clear(Adr.Adr);
+  Dispose(Adr);
+end;
+
+destructor TDrawer.Destroy;
+
+begin
+  Clear(DrawObjects);
+end;
+
+
 
 end.

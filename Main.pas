@@ -54,6 +54,7 @@ var
 
 procedure TForm2.FormDestroy(Sender: TObject);
 begin
+  Driver.Destroy;
   Characer.Destroy;
   bg.Destroy;
 end;
