@@ -66,31 +66,27 @@ Start: integer;
 begin
   Driver := TDrawer.Create(GetTickCount, 15000);
   bg := TBackGround.Create();
- bg.AddKeyFrame([], [], [TLine.Create(0, 900, 700, 700, clBlack, clLime),
-    TLine.Create(700, 0, 700, 700, clBlack, clWhite),
-    TLine.Create(400, 500, 400, 785, clBlack, clWhite),
-    TLine.Create(200, 555, 200, 840, clBlack, clWhite),
-    TLine.Create(400, 500, 200, 555, clBlack, clWhite),
-    TLine.Create(200, 840, 400, 785, clBlack, clWhite),
-    TLine.Create(400, 500, 400, 785, clBlack, clWhite),
-    TLine.Create(200, 555, 200, 840, clBlack, clWhite),
-    TLine.Create(400, 500, 200, 555, clBlack, clWhite),
-    TLine.Create(200, 840, 400, 785, clBlack, clWhite)],
-    [TPolyGon.Create([Point(0,0),Point(0,500),Point(500,500),Point(750,250),Point(0,0)],clGreen,clBlue)], 0);
+ bg.AddKeyFrame([], [], [TLine.Create(0, 900, 700, 700, clBlack, clBlack)],
+    [TPolyGon.Create([Point(700,-10),Point(700,700),Point(-10,900),Point(-10,-10)],clBlack,clWhite),
+    TPolyGon.Create([Point(400,500),Point(400,785),Point(200,840),Point(200,555)],clBlack,clBlack),
+    TPolyGon.Create([Point(400,500),Point(400,785),Point(200,840),Point(200,555)],clBlack,clWhite)], 0);
 
-  bg.AddKeyFrame([], [], [TLine.Create(0, 900, 700, 700, clBlack, clLime),
-    TLine.Create(700, 0, 700, 700, clBlack, clWhite),
-    TLine.Create(400, 500, 400, 785, clBlack, clWhite),
-    TLine.Create(200, 555, 200, 840, clBlack, clWhite),
-    TLine.Create(400, 500, 200, 555, clBlack, clWhite),
-    TLine.Create(200, 840, 400, 785, clBlack, clWhite),
-    TLine.Create(400, 500, 400, 785, clBlack, clWhite),
-    TLine.Create(200, 555, 200, 840, clBlack, clWhite),
-    TLine.Create(400, 500, 200, 555, clBlack, clWhite),
-    TLine.Create(200, 840, 400, 785, clBlack, clWhite)],
-    [TPolyGon.Create([Point(0,0),Point(0,500),Point(500,500),Point(750,250),Point(0,0)],clGreen,clBlue)], 5000);
+  bg.AddKeyFrame([], [], [],
+    [TPolyGon.Create([Point(700,-10),Point(700,700),Point(-10,900),Point(-10,-10)],clBlack,clWhite),
+    TPolyGon.Create([Point(400,500),Point(400,785),Point(200,840),Point(200,555)],clBlack,clBlack),
+    TPolyGon.Create([Point(400,500),Point(400,785),Point(200,840),Point(200,555)],clBlack,clWhite)], 5000);
 
-    bg.AddKeyFrame([], [], [TLine.Create(0, 900, 700, 700, clBlack, clLime),
+    bg.AddKeyFrame([], [], [],
+    [TPolyGon.Create([Point(700,-10),Point(700,700),Point(-10,900),Point(-10,-10)],clBlack,clWhite),
+    TPolyGon.Create([Point(400,500),Point(400,785),Point(200,840),Point(200,555)],clBlack,clBlack),
+    TPolyGon.Create([Point(400,500),Point(400,785),Point(450,935),Point(450,650)],clBlack,clWhite)], 5050);
+
+     bg.AddKeyFrame([], [], [],
+    [TPolyGon.Create([Point(700,-10),Point(700,700),Point(-10,900),Point(-10,-10)],clBlack,clWhite),
+    TPolyGon.Create([Point(400,500),Point(400,785),Point(200,840),Point(200,555)],clBlack,clBlack),
+    TPolyGon.Create([Point(400,500),Point(400,785),Point(600,730),Point(600,445)],clBlack,clWhite)], 5100);
+
+  { bg.AddKeyFrame([], [], [TLine.Create(0, 900, 700, 700, clBlack, clLime),
     TLine.Create(700, 0, 700, 700, clBlack, clWhite),
     TLine.Create(400, 500, 400, 785, clBlack, clWhite),
     TLine.Create(200, 555, 200, 840, clBlack, clWhite),
@@ -110,7 +106,7 @@ begin
     TLine.Create(400, 500, 400, 785, clBlack, clWhite),
     TLine.Create(600, 445, 600, 730, clBlack, clWhite),
     TLine.Create(400, 500, 600, 445, clBlack, clWhite),
-    TLine.Create(600, 730, 400, 785, clBlack, clWhite)],[], 5100);
+    TLine.Create(600, 730, 400, 785, clBlack, clWhite)],[], 5100);  }
 
     bg.AddKeyFrame([], [], [TLine.Create(0, 900, 700, 700, clBlack, clLime),
     TLine.Create(700, 0, 700, 700, clBlack, clWhite),
@@ -123,7 +119,7 @@ begin
     TLine.Create(400, 500, 600, 445, clBlack, clWhite),
     TLine.Create(600, 730, 400, 785, clBlack, clWhite)],[], 10000);
 
-    bg.AddKeyFrame([], [], [TLine.Create(0, 900, 700, 700, clBlack, clLime),
+   { bg.AddKeyFrame([], [], [TLine.Create(0, 900, 700, 700, clBlack, clLime),
     TLine.Create(700, 0, 700, 700, clBlack, clWhite),
     TLine.Create(400, 500, 400, 785, clBlack, clWhite),
     TLine.Create(200, 555, 200, 840, clBlack, clWhite),
@@ -132,7 +128,8 @@ begin
     TLine.Create(400, 500, 400, 785, clBlack, clWhite),
     TLine.Create(600, 445, 600, 730, clBlack, clWhite),
     TLine.Create(400, 500, 600, 445, clBlack, clWhite),
-    TLine.Create(600, 730, 400, 785, clBlack, clWhite)],[], 100000);
+    TLine.Create(600, 730, 400, 785, clBlack, clWhite)],[], 100000);   }
+
   Characer := TCharacter.Create();
   {Characer.AddLoopFrame([First, Secon], [50, 50], [100, 200], 4000, 20);
   Characer.AddLoopFrame([Secon, Second], [50, 50], [1000, 2000], 8000, 4);}
