@@ -28,7 +28,9 @@ type
     Adr: TChrKeyFrameAdr;
   end;
 
+  TBodyPRowAlt = array [1..13, 1..2 ] of integer;
   TBodyPRow = array [1 .. 14, 1 .. 2] of Integer;
+  TPosition = array [1 .. 2] of Integer;
 
   TCharacter = class(TDrawObject)
   public
