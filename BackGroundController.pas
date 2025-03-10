@@ -103,7 +103,7 @@ begin
     self.Points[i] := Points[i];
   end;
   PColor := clPen;
-  BColor := clPen;
+  BColor := clBrush;
 end;
 
 procedure TRectangle.Draw(Canvas: TCanvas);
