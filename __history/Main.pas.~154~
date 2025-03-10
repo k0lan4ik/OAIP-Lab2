@@ -74,8 +74,7 @@ begin
     TLine.Create(400, 500, 400, 785, clBlack, clWhite),
     TLine.Create(200, 555, 200, 840, clBlack, clWhite),
     TLine.Create(400, 500, 200, 555, clBlack, clWhite),
-    TLine.Create(200, 840, 400, 785, clBlack, clWhite)],
-    [TPolyGon.Create([Point(0,0),Point(0,500),Point(500,500),Point(750,250),Point(0,0)],clGreen,clBlue)], 0);
+    TLine.Create(200, 840, 400, 785, clBlack, clWhite)],[TPolyGon.Create([Point(0,0),Point(0,500),Point(500,500),Point(750,250),Point(0,0)],clGreen,clBlue)], 0);
 
   bg.AddKeyFrame([], [], [TLine.Create(0, 900, 700, 700, clBlack, clLime),
     TLine.Create(700, 0, 700, 700, clBlack, clWhite),
@@ -86,8 +85,7 @@ begin
     TLine.Create(400, 500, 400, 785, clBlack, clWhite),
     TLine.Create(200, 555, 200, 840, clBlack, clWhite),
     TLine.Create(400, 500, 200, 555, clBlack, clWhite),
-    TLine.Create(200, 840, 400, 785, clBlack, clWhite)],
-    [TPolyGon.Create([Point(0,0),Point(0,500),Point(500,500),Point(750,250),Point(0,0)],clGreen,clBlue)], 5000);
+    TLine.Create(200, 840, 400, 785, clBlack, clWhite)],[], 5000);
 
     bg.AddKeyFrame([], [], [TLine.Create(0, 900, 700, 700, clBlack, clLime),
     TLine.Create(700, 0, 700, 700, clBlack, clWhite),

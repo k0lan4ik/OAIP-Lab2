@@ -97,7 +97,6 @@ constructor TPolyGon.Create(Points: array of TPoint; clPen, clBrush: TColor);
 var
   i: integer;
 begin
-  SetLength(self.Points,Length(Points));
   for i := Low(Points) to High(Points) do
   begin
     self.Points[i] := Points[i];
@@ -262,11 +261,10 @@ begin
           left.Inf.PolyGons[Steps].PColor, left.Inf.PolyGons[Steps].BColor);
         with left.Inf.PolyGons[Steps] do
         begin
-          if (right.Inf.PolyGons <> nil) then
           for i := Low(Points)
             to High(Points) do
           begin
-              PolyGon.Points[i] := Lerp(Point(Points[i].X,
+            PolyGon.Points[i] := Lerp(Point(Points[i].X,
               Points[i].Y),
               Point(right.Inf.PolyGons[Steps].Points[i].X,
               right.Inf.PolyGons[Steps].Points[i].Y), left.Inf.Time, CurrentTime,
