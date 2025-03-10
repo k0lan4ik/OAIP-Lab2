@@ -40,7 +40,7 @@ var
     (10, 1), (1, 0), (10, -1), (1, 0), (10, -1), (10, 1), (1, 0), (10, 1));
     GetUp: TBodyPRow = ((1700, 810), (-1, 0), (-1, 0), (-1, 0), (1, -5), (0, 1),
     (1, -3), (0, 1), (10, -1), (1, 0), (10, -1), (10, 1), (1, 0), (10, 1));
-  First: TBodyPRow = ((1630, 720), (0, -1), (0, -1), (0, -1), (-1, 1), (0, 1),
+  First: TBodyPRow = ((1600, 720), (0, -1), (0, -1), (0, -1), (-1, 1), (0, 1),
     (1, 1), (0, 1), (-1, 1), (0, 1), (-1, 0), (1, 1), (0, 1), (1, 0));
   Second: TBodyPRow = ((320, 400), (0, -1), (0, -1), (0, -1), (-1, 1), (0, 1),
     (3, -1), (0, -1), (-1, 1), (0, 1), (-1, 0), (1, 1), (0, 1), (1, 0));
@@ -162,10 +162,9 @@ begin
   if i <> 3 then
   Characer.AddKeyFrame(Wheel1, 50, Start + 300 + Period*i);
   end;
-  {Characer.AddKeyFrame(Laying, 50, 7000);
+  Characer.AddKeyFrame(Laying, 50, 7000);
   Characer.AddKeyFrame(GetUp, 50, 8000);
   Characer.AddKeyFrame(First, 50, 9000);
-  Characer.AddKeyFrame(First, 50, 10000);}
   Driver.AddDrawObj(bg);
   Driver.AddDrawObj(Characer);
 end;

@@ -28,7 +28,9 @@ type
     Adr: TChrKeyFrameAdr;
   end;
 
+  TBodyPRowAlt = array [1..13, 1..2 ] of integer;
   TBodyPRow = array [1 .. 14, 1 .. 2] of Integer;
+  TPosition = array [1 .. 2] of Integer;
 
   TCharacter = class(TDrawObject)
   public
@@ -39,12 +41,15 @@ type
 
     procedure AddKeyFrame(const Parts: TBodyPRow; const Len: Integer;
       const Time: Cardinal);
-    destructor Destroy();override;
+    procedure AddLoopFrame(Parts: array of TBodyPRow;
+      const Lens: array of Integer; const delTimes: array of Cardinal;
+       StartTime: Cardinal;const Count: Integer);
+    destructor Destroy(); override;
   private
     procedure FreeFrame(FrameForFree: TChrKeyFrameAdr);
     procedure Draw(const left, right: TBodyPart;
       const LeftT, RightT, CurT: Cardinal; const CurAbs: TPoint;
-      const LLen, RLen: Integer; Canvas:  TCanvas);
+      const LLen, RLen: Integer; Canvas: TCanvas);
     function CalculateEndPoint(Length: Integer; const Target: TPoint): TPoint;
   end;
 
@@ -58,14 +63,27 @@ begin
   // SetLength(self.KeyFrames, 1);
 end;
 
-function Lerp(StartPoint, EndPoint: TPoint;
-  Start, Time, Ending: Cardinal): TPoint;
+procedure TCharacter.AddLoopFrame(Parts: array of TBodyPRow;
+  const Lens: array of Integer; const delTimes: array of Cardinal;
+  StartTime: Cardinal;const Count: Integer);
 var
-  delTime: Double;
+  i, j: Integer;
+  del: TPoint;
 begin
-  delTime := (Time - Start) / (Ending - Start + 1);
-  Result.X := Round(StartPoint.X + (EndPoint.X - StartPoint.X) * delTime);
-  Result.Y := Round(StartPoint.Y + (EndPoint.Y - StartPoint.Y) * delTime);
+  del := Point(Parts[High(Parts)][1][1] - Parts[Low(Parts)][1][1], Parts[High(Parts)][1][2] - Parts[Low(Parts)][1][2]);
+  for i := 1 to Count do
+  begin
+     j := Low(Parts);
+     While j <= High(Parts) do
+     begin
+      self.AddKeyFrame(Parts[j],Lens[j],delTimes[j]+StartTime);
+      Inc(Parts[j][1][1],del.X);
+      Inc(Parts[j][1][2],del.Y);
+      Inc(j);
+     end;
+     Dec(j);
+     StartTime := StartTime + delTimes[j];
+  end;
 end;
 
 procedure TCharacter.AddKeyFrame(const Parts: TBodyPRow; const Len: Integer;
@@ -165,9 +183,9 @@ end;
 procedure TCharacter.Paint(const CurrentTime: Cardinal; Canvas: TCanvas);
 var
   left, right, mid: TChrKeyFrameAdr;
-  Steps: Integer;
+  Steps, i: Integer;
 begin
-  Canvas.Pen.Width := 5;
+  Canvas.Pen.Width := 10;
   Canvas.Pen.Color := clBlack;
   Canvas.Brush.Color := clWhite;
   left := KeyFrames;
@@ -182,7 +200,8 @@ begin
   while (left^.Adr <> right) do
   begin
     mid := left;
-    for Steps := 1 to Steps div 2 do
+    Steps := Steps div 2;
+    for i := 0 to Steps do
       mid := mid^.Adr;
     if mid^.Inf.Time <= CurrentTime then
       left := mid
@@ -191,8 +210,9 @@ begin
   end;
   if right <> nil then
     Draw(left.Inf.Body, right.Inf.Body, left.Inf.Time, right.Inf.Time,
-    CurrentTime, Lerp(left.Inf.Body.Local, right.Inf.Body.Local, left.Inf.Time,
-    CurrentTime, right.Inf.Time), left.Inf.Len,right.Inf.Len,Canvas);
+      CurrentTime, self.Lerp(left.Inf.Body.Local, right.Inf.Body.Local,
+      left.Inf.Time, CurrentTime, right.Inf.Time), left.Inf.Len,
+      right.Inf.Len, Canvas);
 end;
 
 function TCharacter.CalculateEndPoint(Length: Integer;
@@ -245,29 +265,26 @@ begin
     begin
       Canvas.MoveTo(CurAbs.X, CurAbs.Y);
       if left.Linked[i].IsFoot then
-        Canvas.LineTo(CurAbs.X + BodyPart.X div 2,
-          CurAbs.Y + BodyPart.Y div 2)
+        Canvas.LineTo(CurAbs.X + BodyPart.X div 2, CurAbs.Y + BodyPart.Y div 2)
       else
         Canvas.LineTo(CurAbs.X + BodyPart.X, CurAbs.Y + BodyPart.Y);
     end;
     NextAbsolute := Point(CurAbs.X + BodyPart.X, CurAbs.Y + BodyPart.Y);
-    Draw(left.Linked[i], right.Linked[i], LeftT, RightT, CurT,
-      NextAbsolute, LLen, RLen,Canvas);
+    Draw(left.Linked[i], right.Linked[i], LeftT, RightT, CurT, NextAbsolute,
+      LLen, RLen, Canvas);
   end;
 end;
 
 procedure TCharacter.FreeFrame(FrameForFree: TChrKeyFrameAdr);
 begin
-   if FrameForFree^.Adr  <> nil then
+  if FrameForFree^.Adr <> nil then
     FreeFrame(FrameForFree^.Adr);
-   Dispose(FrameForFree);
+  Dispose(FrameForFree);
 end;
 
 destructor TCharacter.Destroy();
 begin
-    FreeFrame(KeyFrames);
+  FreeFrame(KeyFrames);
 end;
-
-
 
 end.

@@ -183,9 +183,9 @@ end;
 procedure TCharacter.Paint(const CurrentTime: Cardinal; Canvas: TCanvas);
 var
   left, right, mid: TChrKeyFrameAdr;
-  Steps: Integer;
+  Steps, i: Integer;
 begin
-  Canvas.Pen.Width := 5;
+  Canvas.Pen.Width := 10;
   Canvas.Pen.Color := clBlack;
   Canvas.Brush.Color := clWhite;
   left := KeyFrames;
@@ -200,9 +200,10 @@ begin
   while (left^.Adr <> right) do
   begin
     mid := left;
-    for Steps := 1 to Steps div 2 do
+    Steps := Steps div 2;
+    for i := 0 to Steps do
       mid := mid^.Adr;
-    if mid^.Inf.Time <= CurrentTime then
+    if ((mid <> nil) and (mid^.Inf.Time <= CurrentTime)) then
       left := mid
     else
       right := mid;

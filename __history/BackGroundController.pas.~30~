@@ -203,7 +203,7 @@ begin
     mid := left;
     for Steps := 1 to Steps div 2 do
       mid := mid^.Adr;
-    if ((mid <> nil) and (mid^.Inf.Time <= CurrentTime)) then
+    if mid^.Inf.Time <= CurrentTime then
       left := mid
     else
       right := mid;
