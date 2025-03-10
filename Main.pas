@@ -42,6 +42,8 @@ var
     (1, -3), (0, 1), (10, -1), (1, 0), (10, -1), (10, 1), (1, 0), (10, 1));
   First: TBodyPRow = ((1630, 720), (0, -1), (0, -1), (0, -1), (-1, 1), (0, 1),
     (1, 1), (0, 1), (-1, 1), (0, 1), (-1, 0), (1, 1), (0, 1), (1, 0));
+  Centered: TBodyPRow = ((950, 720), (0, -1), (0, -1), (0, -1), (-1, 1), (0, 1),
+    (1, 1), (0, 1), (-1, 1), (0, 1), (-1, 0), (1, 1), (0, 1), (1, 0));
   Second: TBodyPRow = ((320, 400), (0, -1), (0, -1), (0, -1), (-1, 1), (0, 1),
     (3, -1), (0, -1), (-1, 1), (0, 1), (-1, 0), (1, 1), (0, 1), (1, 0));
   Secon: TBodyPRow = ((210, 550), (0, -1), (0, -1), (0, -1), (-1, 1), (0, 1),
@@ -64,81 +66,58 @@ begin
 end;
 
 procedure TForm2.OnCreate(Sender: TObject);
-var Period: integer;
-MovementX, MovementY: integer;
-Start: integer;
-x, y: integer;
+var Period, MovementX, MovementY, Start, Offset: integer;
 begin
   Driver := TDrawer.Create(GetTickCount, 150000);
   bg := TBackGround.Create();
- bg.AddKeyFrame([], [], [TLine.Create(400, 785, 10000, 785, clBlack, clBlack), TLine.Create(200, 840, 10000, 840, clBlack, clBlack)],
+
+  Offset:= 0;
+
+ bg.AddKeyFrame([TRectangle.Create(910,700,990,550,clBlack,ClWhite),TRectangle.Create(1410,700,1490,550,clBlack,ClWhite),TRectangle.Create(1910,700,1990,550,clBlack,ClWhite)],
+ [TEllipse.Create(800,600, 1100,200, clBlack, clWhite),TEllipse.Create(1300,600, 1600,200, clBlack, clWhite),TEllipse.Create(1800,600, 2100,200, clBlack, clWhite)],
+ [TLine.Create(400, 785, 10000, 785, clBlack, clBlack), TLine.Create(200, 840, 10000, 840, clBlack, clBlack)],
     [TPolyGon.Create([Point(700,-10),Point(700,700),Point(-10,900),Point(-10,-10)],clBlack,clWhite),
     TPolyGon.Create([Point(400,500),Point(400,785),Point(200,840),Point(200,555)],clBlack,clBlack),
     TPolyGon.Create([Point(400,500),Point(400,785),Point(200,840),Point(200,555)],clBlack,clWhite)], 0);
 
-  bg.AddKeyFrame([], [], [TLine.Create(400, 785, 10000, 785, clBlack, clBlack), TLine.Create(200, 840, 10000, 840, clBlack, clBlack)],
+  bg.AddKeyFrame([TRectangle.Create(910,700,990,550,clBlack,ClWhite),TRectangle.Create(1410,700,1490,550,clBlack,ClWhite),TRectangle.Create(1910,700,1990,550,clBlack,ClWhite)],
+ [TEllipse.Create(800,600, 1100,200, clBlack, clWhite),TEllipse.Create(1300,600, 1600,200, clBlack, clWhite),TEllipse.Create(1800,600, 2100,200, clBlack, clWhite)],
+  [TLine.Create(400, 785, 10000, 785, clBlack, clBlack), TLine.Create(200, 840, 10000, 840, clBlack, clBlack)],
     [TPolyGon.Create([Point(700,-10),Point(700,700),Point(-10,900),Point(-10,-10)],clBlack,clWhite),
     TPolyGon.Create([Point(400,500),Point(400,785),Point(200,840),Point(200,555)],clBlack,clBlack),
     TPolyGon.Create([Point(400,500),Point(400,785),Point(200,840),Point(200,555)],clBlack,clWhite)], 5000);
 
-    bg.AddKeyFrame([], [], [TLine.Create(400, 785, 10000, 785, clBlack, clBlack), TLine.Create(200, 840, 10000, 840, clBlack, clBlack)],
+    bg.AddKeyFrame([TRectangle.Create(910,700,990,550,clBlack,ClWhite),TRectangle.Create(1410,700,1490,550,clBlack,ClWhite),TRectangle.Create(1910,700,1990,550,clBlack,ClWhite)],
+ [TEllipse.Create(800,600, 1100,200, clBlack, clWhite),TEllipse.Create(1300,600, 1600,200, clBlack, clWhite),TEllipse.Create(1800,600, 2100,200, clBlack, clWhite)],
+    [TLine.Create(400, 785, 10000, 785, clBlack, clBlack), TLine.Create(200, 840, 10000, 840, clBlack, clBlack)],
     [TPolyGon.Create([Point(700,-10),Point(700,700),Point(-10,900),Point(-10,-10)],clBlack,clWhite),
     TPolyGon.Create([Point(400,500),Point(400,785),Point(200,840),Point(200,555)],clBlack,clBlack),
     TPolyGon.Create([Point(400,500),Point(400,785),Point(450,935),Point(450,650)],clBlack,clWhite)], 5050);
 
-     bg.AddKeyFrame([], [], [TLine.Create(400, 785, 10000, 785, clBlack, clBlack), TLine.Create(200, 840, 10000, 840, clBlack, clBlack)],
+     bg.AddKeyFrame([TRectangle.Create(910,700,990,550,clBlack,ClWhite),TRectangle.Create(1410,700,1490,550,clBlack,ClWhite),TRectangle.Create(1910,700,1990,550,clBlack,ClWhite)],
+     [TEllipse.Create(800,600, 1100,200, clBlack, clWhite),TEllipse.Create(1300,600, 1600,200, clBlack, clWhite),TEllipse.Create(1800,600, 2100,200, clBlack, clWhite)],
+     [TLine.Create(400, 785, 10000, 785, clBlack, clBlack), TLine.Create(200, 840, 10000, 840, clBlack, clBlack)],
     [TPolyGon.Create([Point(700,-10),Point(700,700),Point(-10,900),Point(-10,-10)],clBlack,clWhite),
     TPolyGon.Create([Point(400,500),Point(400,785),Point(200,840),Point(200,555)],clBlack,clBlack),
     TPolyGon.Create([Point(400,500),Point(400,785),Point(600,730),Point(600,445)],clBlack,clWhite)], 5100);
 
-  { bg.AddKeyFrame([], [], [TLine.Create(0, 900, 700, 700, clBlack, clLime),
-    TLine.Create(700, 0, 700, 700, clBlack, clWhite),
-    TLine.Create(400, 500, 400, 785, clBlack, clWhite),
-    TLine.Create(200, 555, 200, 840, clBlack, clWhite),
-    TLine.Create(400, 500, 200, 555, clBlack, clWhite),
-    TLine.Create(200, 840, 400, 785, clBlack, clWhite),
-    TLine.Create(400, 500, 400, 785, clBlack, clWhite),
-    TLine.Create(450, 650, 450, 935, clBlack, clWhite),
-    TLine.Create(400, 500, 450, 650, clBlack, clWhite),
-    TLine.Create(450, 935, 400, 785, clBlack, clWhite)],[], 5050);
+    bg.AddKeyFrame([TRectangle.Create(910,700,990,550,clBlack,ClWhite),TRectangle.Create(1410,700,1490,550,clBlack,ClWhite),TRectangle.Create(1910,700,1990,550,clBlack,ClWhite),TRectangle.Create(2410-Offset,700,2490-Offset,550,clBlack,ClWhite)],
+     [TEllipse.Create(800,600, 1100,200, clBlack, clWhite),TEllipse.Create(1300,600, 1600,200, clBlack, clWhite),TEllipse.Create(1800,600, 2100,200, clBlack, clWhite),TEllipse.Create(2300-Offset,600, 2600-Offset,200, clBlack, clWhite)],
+     [TLine.Create(400, 785, 10000, 785, clBlack, clBlack), TLine.Create(200, 840, 10000, 840, clBlack, clBlack)],
+    [TPolyGon.Create([Point(700,-10),Point(700,700),Point(-10,900),Point(-10,-10)],clBlack,clWhite),
+    TPolyGon.Create([Point(400,500),Point(400,785),Point(200,840),Point(200,555)],clBlack,clBlack),
+    TPolyGon.Create([Point(400,500),Point(400,785),Point(600,730),Point(600,445)],clBlack,clWhite)], 8000);
 
-    bg.AddKeyFrame([], [], [TLine.Create(0, 900, 700, 700, clBlack, clLime),
-    TLine.Create(700, 0, 700, 700, clBlack, clWhite),
-    TLine.Create(400, 500, 400, 785, clBlack, clWhite),
-    TLine.Create(200, 555, 200, 840, clBlack, clWhite),
-    TLine.Create(400, 500, 200, 555, clBlack, clWhite),
-    TLine.Create(200, 840, 400, 785, clBlack, clWhite),
-    TLine.Create(400, 500, 400, 785, clBlack, clWhite),
-    TLine.Create(600, 445, 600, 730, clBlack, clWhite),
-    TLine.Create(400, 500, 600, 445, clBlack, clWhite),
-    TLine.Create(600, 730, 400, 785, clBlack, clWhite)],[], 5100);  }
+    Offset:=680;
 
-   bg.AddKeyFrame([], [], [TLine.Create(0, 900, 700, 700, clBlack, clLime),
-    TLine.Create(700, 0, 700, 700, clBlack, clWhite),
-    TLine.Create(400, 500, 400, 785, clBlack, clWhite),
-    TLine.Create(200, 555, 200, 840, clBlack, clWhite),
-    TLine.Create(400, 500, 200, 555, clBlack, clWhite),
-    TLine.Create(200, 840, 400, 785, clBlack, clWhite),
-    TLine.Create(400, 500, 400, 785, clBlack, clWhite),
-    TLine.Create(600, 445, 600, 730, clBlack, clWhite),
-    TLine.Create(400, 500, 600, 445, clBlack, clWhite),
-    TLine.Create(600, 730, 400, 785, clBlack, clWhite)],[], 1000000);
-
-   { bg.AddKeyFrame([], [], [TLine.Create(0, 900, 700, 700, clBlack, clLime),
-    TLine.Create(700, 0, 700, 700, clBlack, clWhite),
-    TLine.Create(400, 500, 400, 785, clBlack, clWhite),
-    TLine.Create(200, 555, 200, 840, clBlack, clWhite),
-    TLine.Create(400, 500, 200, 555, clBlack, clWhite),
-    TLine.Create(200, 840, 400, 785, clBlack, clWhite),
-    TLine.Create(400, 500, 400, 785, clBlack, clWhite),
-    TLine.Create(600, 445, 600, 730, clBlack, clWhite),
-    TLine.Create(400, 500, 600, 445, clBlack, clWhite),
-    TLine.Create(600, 730, 400, 785, clBlack, clWhite)],[], 100000);   }
+    bg.AddKeyFrame([TRectangle.Create(910-Offset,700,990-Offset,550,clBlack,ClWhite),TRectangle.Create(1410-Offset,700,1490-Offset,550,clBlack,ClWhite),TRectangle.Create(1910-Offset,700,1990-Offset,550,clBlack,ClWhite),TRectangle.Create(2410-Offset,700,2490-Offset,550,clBlack,ClWhite)],
+     [TEllipse.Create(800-Offset,600, 1100-Offset,200, clBlack, clWhite),TEllipse.Create(1300-Offset,600, 1600-Offset,200, clBlack, clWhite),TEllipse.Create(1800-Offset,600, 2100-Offset,200, clBlack, clWhite),TEllipse.Create(2300-Offset,600, 2600-Offset,200, clBlack, clWhite)],
+     [TLine.Create(400-Offset, 785, 10000-Offset, 785, clBlack, clBlack), TLine.Create(200-Offset, 840, 10000-Offset, 840, clBlack, clBlack)],
+    [TPolyGon.Create([Point(700-Offset,-10),Point(700-Offset,700),Point(-10-Offset,900),Point(-10-Offset,-10)],clBlack,clWhite),
+    TPolyGon.Create([Point(400-Offset,500),Point(400-Offset,785),Point(200-Offset,840),Point(200-Offset,555)],clBlack,clBlack),
+    TPolyGon.Create([Point(400-Offset,500),Point(400-Offset,785),Point(600-Offset,730),Point(600-Offset,445)],clBlack,clWhite)], 9000);
 
   Characer := TCharacter.Create();
-  {Characer.AddLoopFrame([First, Secon], [50, 50], [100, 200], 4000, 20);
-  Characer.AddLoopFrame([Secon, Second], [50, 50], [1000, 2000], 8000, 4);}
-  //Characer.AddLoopFrame([Wheel1, Wheel2, Wheel3, Wheel4], [50, 50, 50, 50], [100, 100, 100, 100], 5000, 20);
   Period:=400;
   MovementX:=100;
   Start:=5000;
@@ -162,10 +141,10 @@ begin
   if i <> 3 then
   Characer.AddKeyFrame(Wheel1, 50, Start + 300 + Period*i);
   end;
-  {Characer.AddKeyFrame(Laying, 50, 7000);
+  Characer.AddKeyFrame(Laying, 50, 7000);
   Characer.AddKeyFrame(GetUp, 50, 8000);
-  Characer.AddKeyFrame(First, 50, 9000);
-  Characer.AddKeyFrame(First, 50, 10000);}
+  Characer.AddKeyFrame(Centered, 50, 9000);
+  Characer.AddKeyFrame(Centered, 50, 10000);
   Driver.AddDrawObj(bg);
   Driver.AddDrawObj(Characer);
 end;
