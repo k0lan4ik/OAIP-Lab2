@@ -7,10 +7,11 @@ uses
   System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, CharacterController, EventController,
   BackGroundController,
-  Vcl.ExtCtrls;
+  Vcl.ExtCtrls, Vcl.MPlayer;
 
 type
   TForm2 = class(TForm)
+    MediaPlayer1: TMediaPlayer;
     procedure OnPaint(Sender: TObject);
     procedure OnCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
@@ -102,7 +103,7 @@ end;
 
 procedure TForm2.OnCreate(Sender: TObject);
 var
-  Period, MovementX, MovementY, Start, Offset, I: integer;
+  Period, MovementX, Start, Offset, I: integer;
 begin
   Driver := TDrawer.Create(GetTickCount, 39999);
   bg := TBackGround.Create();
@@ -380,11 +381,10 @@ begin
   Driver.AddDrawObj(Character);
   Driver.AddDrawObj(CoolCircle);
   Driver.AddDrawObj(CoolTransition);
+  Form2.MediaPlayer1.Play;
 end;
 
 procedure TForm2.OnPaint(Sender: TObject);
-var
-  CurTime: Cardinal;
 begin
   Driver.DrawFrame(Form2, Form2.Canvas);
 end;

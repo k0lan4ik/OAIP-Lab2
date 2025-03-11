@@ -28,7 +28,7 @@ type
     Adr: TChrKeyFrameAdr;
   end;
 
-  TBodyPRowAlt = array [1..13, 1..2 ] of integer;
+  TBodyPRowAlt = array [1 .. 13, 1 .. 2] of Integer;
   TBodyPRow = array [1 .. 14, 1 .. 2] of Integer;
   TPosition = array [1 .. 2] of Integer;
 
@@ -41,9 +41,6 @@ type
 
     procedure AddKeyFrame(const Parts: TBodyPRow; const Len: Integer;
       const Time: Cardinal);
-    procedure AddLoopFrame(Parts: array of TBodyPRow;
-      const Lens: array of Integer; const delTimes: array of Cardinal;
-       StartTime: Cardinal;const Count: Integer);
     destructor Destroy(); override;
   private
     procedure FreeFrame(FrameForFree: TChrKeyFrameAdr);
@@ -61,29 +58,6 @@ begin
   self.KeyFrames^.Adr := nil;
   self.EndFrame := self.KeyFrames;
   // SetLength(self.KeyFrames, 1);
-end;
-
-procedure TCharacter.AddLoopFrame(Parts: array of TBodyPRow;
-  const Lens: array of Integer; const delTimes: array of Cardinal;
-  StartTime: Cardinal;const Count: Integer);
-var
-  i, j: Integer;
-  del: TPoint;
-begin
-  del := Point(Parts[High(Parts)][1][1] - Parts[Low(Parts)][1][1], Parts[High(Parts)][1][2] - Parts[Low(Parts)][1][2]);
-  for i := 1 to Count do
-  begin
-     j := Low(Parts);
-     While j <= High(Parts) do
-     begin
-      self.AddKeyFrame(Parts[j],Lens[j],delTimes[j]+StartTime);
-      Inc(Parts[j][1][1],del.X);
-      Inc(Parts[j][1][2],del.Y);
-      Inc(j);
-     end;
-     Dec(j);
-     StartTime := StartTime + delTimes[j];
-  end;
 end;
 
 procedure TCharacter.AddKeyFrame(const Parts: TBodyPRow; const Len: Integer;
@@ -203,7 +177,7 @@ begin
     Steps := Steps div 2;
     for i := 0 to Steps do
       if mid <> nil then
-      mid := mid^.Adr;
+        mid := mid^.Adr;
     if ((mid <> nil) and (mid^.Inf.Time <= CurrentTime)) then
       left := mid
     else

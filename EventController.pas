@@ -9,7 +9,6 @@ uses
 
 type
   TDrawObject = class
-    // procedure (); virtual; abstract;
   public
     procedure Paint(const CurrentTime: Cardinal; Canvas: TCanvas);
       virtual; abstract;
