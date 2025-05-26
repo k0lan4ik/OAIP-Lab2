@@ -23,7 +23,7 @@ object Form2: TForm2
     Width = 253
     Height = 30
     AutoOpen = True
-    FileName = 'C:\Users\'#1040#1088#1089#1077#1085#1080#1081'\Desktop\OAIP-Lab2\Win32\Debug\MargoIsBest.wav'
+    FileName = 'MargoIsBest.wav'
     Visible = False
     TabOrder = 0
   end

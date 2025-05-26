@@ -10,7 +10,7 @@ const n = 23;
     procedure HouseInit;
     function Get: Integer;
     procedure Change(_tr: Integer);
-    procedure DrawBackground(Canvas: TCanvas);
+    procedure Background(Canvas: TCanvas);
     procedure DrawHouse1(Canvas: TCanvas);
     procedure DrawHouse2(Canvas: TCanvas);
     procedure DrawHouse3(Canvas: TCanvas);
@@ -59,12 +59,12 @@ var
 
 implementation
 
-//{$R *.dfm}
+{$R *.dfm}
 
 
 procedure TForm1.FormPaint(Sender: TObject);
 begin
-  // РћСЃРЅРѕРІРЅР°СЏ С„СѓРЅРєС†РёСЏ: РЅР°С‡Р°Р»СЊРЅС‹Рµ Р·РЅР°С‡РµРЅРёСЏ Рё С„СѓРЅРєС†РёРё
+  // Основная функция: начальные значения и функции
   DrawMan;
   kadr := 0;
   kadr2 := 0;
@@ -89,7 +89,7 @@ begin
   shty := 416;
   k := 1;
 
-  MediaPlayer1.FileName := 'C:\Users\РњРёС…Р°РёР»\Desktop\university\sem2\oaip\lab22\final2\lab222\fon_music.mp3';
+  MediaPlayer1.FileName := 'C:\Users\Михаил\Desktop\university\sem2\oaip\lab22\final2\lab222\fon_music.mp3';
   MediaPlayer1.Open;
   MediaPlayer1.Play;
   //DoubleBuffered := True;
@@ -111,7 +111,7 @@ end;
 
 procedure TForm1.Timer1Timer(Sender: TObject);
 begin
-  // РўР°Р№РјРµСЂ - Р·Р°РїСѓСЃРєР°РµС‚ РѕС‚СЂРёСЃРѕРІРєРё. Р“РѕС‚РѕРІР°СЏ С„СѓРЅРєС†РёСЏ.
+  // Таймер - запускает отрисовки. Готовая функция.
   Canvas.FillRect(ClientRect);
   DoubleBuffered := True;
   DrawCartoon;
@@ -156,7 +156,7 @@ begin
   Canvas.PolyLine([Point(xHouses + 130, 150), Point(xHouses + 80, 150), Point(xHouses + 80, 80), Point(xHouses + 130, 80), Point(xHouses + 130, 150)]);
 end;
 
-procedure DrawBackground(Canvas: TCanvas);
+procedure Background(Canvas: TCanvas);
 begin
   for var g := 1 to 23 do
   begin
@@ -212,7 +212,7 @@ end;
 
 procedure TForm1.DrawMan;
 begin
-  // Р¤СѓРЅРєС†РёСЏ РѕС‚СЂРёСЃРѕРІРєРё С‡РµР»РѕРІРµРєР°
+  // Функция отрисовки человека
   Coordinates;
   DrawPerson;
 end;
@@ -241,7 +241,7 @@ procedure TForm1.DrawCartoon;
 begin
   if (kadr >= 10) then
   //Background;
-  // Р­С‚Рѕ СЃС†РµРЅС‹, РєРѕС‚РѕСЂС‹Рµ Р·Р°РІРёСЃСЏС‚ РѕС‚ РєР°РґСЂРѕРІ, РЅР° РѕСЃРЅРѕРІРµ РєРѕС‚РѕСЂС‹С… Р·Р°РїСѓСЃРєР°СЋС‚СЃСЏ С„СѓРЅРєС†РёРё СЃС†РµРЅ, РІ РєРѕС‚РѕСЂС‹С… Р·Р°РїСѓСЃРєР°СЋС‚СЃСЏ С„СѓРЅРєС†РёРё РѕС‚СЂРёСЃРѕРІРєРё РїСЂРµРґРјРµС‚РѕРІ.
+  // Это сцены, которые зависят от кадров, на основе которых запускаются функции сцен, в которых запускаются функции отрисовки предметов.
   if (kadr = 60) or (kadr = 180) or (kadr = 300) or (kadr = 420) or (kadr = 540) or (kadr = 630) or (kadr = 720) or (kadr = 780) or (kadr = 900) or (kadr = 1020) or (kadr = 1110) or (kadr = 1370) or (kadr = 1430) or (kadr = 1550) or (kadr = 1670) or (kadr = 1760) or (kadr = 1880) or (kadr = 2010) or (kadr = 2080) or (kadr = 2220) or (kadr = 2360) or (kadr = 2500) or (kadr = 2560) or (kadr = 2620) or (kadr = 2740) or (kadr = 2860) or (kadr = 2980) or (kadr = 3070) or (kadr = 3450) or (kadr = 3540) or (kadr = 3600) or (kadr = 3720) or (kadr = 3840) or (kadr = 3960) or (kadr = 4080) then
   kadr2 := 0;
   if kadr < 60 then
@@ -898,7 +898,7 @@ end;
 
 procedure TForm1.TPullUp;
 begin
-  // РџРѕРґРЅСЏС‚РёРµ
+  // Поднятие
   if (kadr2 >= 0) and (kadr2 < 30) then
   begin
   if kadr2 mod 2 = 0 then
@@ -996,7 +996,7 @@ begin
   DrawPerson
   else if (kadr2 >= 70) and (kadr2 < 130) then
   begin
-  // РР·РјРµРЅСЏС‚СЊ РІС‹СЃРѕС‚Сѓ РЅР° РєРѕС‚РѕСЂСѓСЋ РїРѕРґРЅРёРјРµС‚СЃСЏ С€С‚Р°РЅРіР° СЃ РєРёСЃС‚СЏРјРё
+  // Изменять высоту на которую поднимется штанга с кистями
   lhand0 := lhand0 + 1.5;
   rhand0 := rhand0 + 1.5;
   shty := shty - 3;
@@ -1009,7 +1009,7 @@ begin
   end
   else if (kadr2 >= 130) and (kadr2 < 190) then
   begin
-  // РР·РјРµРЅСЏС‚СЊ РІС‹СЃРѕС‚Сѓ РЅР° РєРѕС‚РѕСЂСѓСЋ РїРѕРґРЅРёРјРµС‚СЃСЏ С€С‚Р°РЅРіР° СЃ РєРёСЃС‚СЏРјРё
+  // Изменять высоту на которую поднимется штанга с кистями
   lhand0 := lhand0 - 1.5;
   rhand0 := rhand0 - 1.5;
   shty := shty + 3;

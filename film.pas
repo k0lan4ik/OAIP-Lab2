@@ -10,7 +10,7 @@ const n = 23;
     procedure HouseInit;
     function Get: Integer;
     procedure Change(_tr: Integer);
-    procedure Background(Canvas: TCanvas);
+    procedure DrawBackground(Canvas: TCanvas);
     procedure DrawHouse1(Canvas: TCanvas);
     procedure DrawHouse2(Canvas: TCanvas);
     procedure DrawHouse3(Canvas: TCanvas);
@@ -59,7 +59,7 @@ var
 
 implementation
 
-{$R *.dfm}
+//{$R *.dfm}
 
 
 procedure TForm1.FormPaint(Sender: TObject);
@@ -156,7 +156,7 @@ begin
   Canvas.PolyLine([Point(xHouses + 130, 150), Point(xHouses + 80, 150), Point(xHouses + 80, 80), Point(xHouses + 130, 80), Point(xHouses + 130, 150)]);
 end;
 
-procedure Background(Canvas: TCanvas);
+procedure DrawBackground(Canvas: TCanvas);
 begin
   for var g := 1 to 23 do
   begin

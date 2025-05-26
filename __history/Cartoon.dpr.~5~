@@ -5,10 +5,7 @@ uses
   Main in 'Main.pas' {Form2},
   CharacterController in 'CharacterController.pas',
   EventController in 'EventController.pas',
-  BackGroundController in 'BackGroundController.pas',
-  film in 'film.pas',
-  PointConverter in 'PointConverter.pas',
-  drawSomeThing in 'drawSomeThing.pas';
+  BackGroundController in 'BackGroundController.pas';
 
 {$R *.res}
 

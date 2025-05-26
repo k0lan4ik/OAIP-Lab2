@@ -7,7 +7,7 @@ uses
   System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, CharacterController, EventController,
   BackGroundController,
-  Vcl.ExtCtrls, Vcl.MPlayer;
+  Vcl.ExtCtrls, Vcl.MPlayer, film,drawSomeThing, System.Types, PointConverter;
 
 type
   TForm2 = class(TForm)
@@ -381,12 +381,47 @@ begin
   Driver.AddDrawObj(Character);
   Driver.AddDrawObj(CoolCircle);
   Driver.AddDrawObj(CoolTransition);
+
+  HouseInit;
+
+
+  SnowInit;
+  SetCanvas(Form2.Canvas);
+
   Form2.MediaPlayer1.Play;
 end;
 
 procedure TForm2.OnPaint(Sender: TObject);
+var i:Integer;
 begin
+  SetFieldRect(Form2.ClientRect);
+  Form2.Canvas.Pen.Width := 3;
+  Form2.Canvas.Pen.Color := clBlack;
+  DrawBackground(Form2.Canvas);
+
   Driver.DrawFrame(Form2, Form2.Canvas);
+
+  for i := 1 to CountSF do
+  begin
+    Snowflakes[i].Y := Snowflakes[i].Y + Snowflakes[i].Speed;
+
+    if Snowflakes[i].Y > 1 then
+    begin
+      Snowflakes[i].Y := 0;
+      Snowflakes[i].X := Random;
+      Snowflakes[i].Length := Random(11) + 10; // 10/20
+      Snowflakes[i].Ratio := Random(41) / 100 + 0.4; // 0.4/0.8
+      Snowflakes[i].Speed := Random(5) / 500 + 0.004; // 0.004/0.012
+    end;
+  end;
+
+  for i := 1 to CountSF do
+    drawSomeThing.DrawSnowflake(
+    PointF(Snowflakes[i].X, Snowflakes[i].Y),
+    Snowflakes[i].Length, 1.5, Snowflakes[i].Ratio, Snowflakes[i].Y*200
+    );
+
+
 end;
 
 end.

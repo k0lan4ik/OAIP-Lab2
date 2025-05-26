@@ -1,4 +1,4 @@
-unit drawSomeThing;
+﻿unit drawSomeThing;
 //DrowSomething
 interface
 
@@ -20,7 +20,7 @@ var
    Snowflakes: array [1..CountSF] of TSnowflake;
 
 procedure SetCanvas(canvas: TCanvas);
-procedure SnowInit;
+
 procedure DrawSnowflake(SFPosF: TPointF; Length: Integer;
   size, Ratio, OffsetAngle: single);
 
