@@ -114,7 +114,7 @@ var
     Bending: TBodyPRow = ((320, 700), (2, -1), (1, 0), (1, 0), (-3, 1), (0, 1),
     (-2, 1), (-1, 5), (1, 2), (0, 1), (1, 0), (1, 1), (0, 1), (1, 0));
     Carrying: TBodyPRow = ((320, 700), (0, -1), (1, -5), (1, -4), (0, 1), (1, 2),
-    (1, 7), (1, 1), (1, 4), (0, 1), (1, 0), (0, 1), (0, 1), (1, 0));
+    (1, 7), (1, 1), (1, 2), (0, 1), (1, 0), (1, 1), (0, 1), (1, 0));
   WalkBall1: TBodyPRow = ((75, 505), (2, -1), (1, 0), (1, -1), (-1, 3), (0, 1),
     (1, 5), (1, 3), (0, 1), (-1, 1), (1, 1), (1, 5), (0, 1), (1, 0));
   WalkBall2: TBodyPRow = ((95, 505), (2, -1), (1, 0), (1, -1), (-1, 7), (1, 10),
@@ -131,33 +131,14 @@ var
     (0, 1), (1, 10), (-1, 5), (-1, 3), (2, 1), (1, 3), (-1, 5), (5, 1));
   WalkBall8: TBodyPRow = ((130, 500), (2, -1), (1, 0), (1, -1), (-1, 6), (-1, 5),
     (1, 3), (1, 5), (-1, 5), (-1, 2), (2, 1), (1, 3), (1, 3), (5, 1));
-  WalkSmallCarry1: TBodyPRow = ((75, 505), (2, -1), (1, 0), (1, -1), (-1, 3), (0, 1),
-    (1, 5), (1, 3), (0, 1), (-1, 1), (1, 1), (1, 5), (0, 1), (1, 0));
-  WalkSmallCarry2: TBodyPRow = ((95, 505), (2, -1), (1, 0), (1, -1), (-1, 7), (1, 10),
-    (0, 1), (1, 7), (1, 6), (-3, 1), (3, 1), (0, 1), (-1, 5), (1, 0));
-  WalkSmallCarry3: TBodyPRow = ((120, 500), (2, -1), (1, 0), (1, -1), (0, 1), (1, 10),
-    (-1, 10), (0, 1), (1, 3), (-1, 5), (5, 1), (-1, 5), (-1, 3), (2, 1));
-  WalkSmallCarry4: TBodyPRow = ((130, 500), (2, -1), (1, 0), (1, -1), (1, 3), (1, 5),
-    (-1, 6), (-1, 5), (1, 3), (1, 3), (5, 1), (-1, 5), (-1, 2), (2, 1));
-  WalkSmallCarry5: TBodyPRow = ((75, 505), (2, -1), (1, 0), (1, -1), (1, 5), (1, 3),
-    (-1, 3), (0, 1), (1, 5), (0, 1), (1, 0), (0, 1), (-1, 1), (1, 1));
-  WalkSmallCarry6: TBodyPRow = ((95, 505), (2, -1), (1, 0), (1, -1), (0, 1), (1, 7),
-    (-1, 7), (1, 10), (0, 1), (-1, 5), (1, 0), (1, 6), (-3, 1), (3, 1));
-  WalkSmallCarry7: TBodyPRow = ((120, 500), (2, -1), (1, 0), (1, -1), (-1, 10), (0, 1),
-    (0, 1), (1, 10), (-1, 5), (-1, 3), (2, 1), (1, 3), (-1, 5), (5, 1));
-  v8: TBodyPRow = ((130, 500), (2, -1), (1, 0), (1, -1), (-1, 6), (-1, 5),
-    (1, 3), (1, 5), (-1, 5), (-1, 2), (2, 1), (1, 3), (1, 3), (5, 1));
-
   StandingBig: TBodyPRow = ((1550, 500), (0, -1), (0, -1), (0, -1), (-1, 6), (-1, 5),
     (1, 3), (1, 5), (-1, 5), (-1, 2), (2, 1), (1, 3), (1, 3), (5, 1));
   SittingMed: TBodyPRow = ((1500, 900), (0,-1), (-1,-4),(-1,-5),(-5,1),(-2,-1),(-1,1),(-1,0), (-1,-3),(-1,2),(-5,-1),(-1,-2),(-1,2),(-1,0));
   SittingMed2: TBodyPRow = ((1500, 900), (0,-1), (-1,-4),(-1,-5),(-1,1),(-1,0),(-5,1),(-2,-1), (-1,-3),(-1,2),(-5,-1),(-1,-2),(-1,2),(-1,0));
-  Ready: TBodyPRow = ((1500, 880),(-1,-5),(-1,-2),(-1,-3),(-1,8),(-1,1),(0,1),(-2,3),(-7,-1),(3,1),(-5,-1),(-6,-1),(2,1),(-1,0));
-  CarryMid: tbodyprow = ((1500, 800),(0,-1),(0,-1),(1,-5),(-1,1),(-1,0),(-1,1),(-1,0),(-1,15),(0,1),(-1,0),(-1,5),(0,1),(-1,0));
 
 var
   Characer, Medium, Big: TCharacter;
-  bg, sSnow, mSnow, bSnow: TBackGround;
+  bg, Snowballs: TBackGround;
   Driver: TDrawer;
 
 procedure TForm2.FormDestroy(Sender: TObject);
@@ -170,37 +151,29 @@ procedure TForm2.OnCreate(Sender: TObject);
 var
   Period, MovementX, MovementY, Start, Offset, I: integer;
 begin
-  Driver := TDrawer.Create(GetTickCount-15000, 29999);
+  Driver := TDrawer.Create(GetTickCount, 39999);
 
   bg := TBackground.Create;
   Big := TCharacter.Create;
   Characer := TCharacter.Create;
   Medium:=TCharacter.Create;
-  sSnow:= TBackground.Create;
-  mSnow:= TBackground.Create;
-  bSnow:= TBackground.Create;
-  for I := 0 to 9 do
+  Snowballs:= TBackground.Create;
+  for I := 0 to 10 do
   begin
     Characer.AddKeyFrame(Sitting, 50, 2000*i);
     Characer.AddKeyFrame(Sitting2, 50, 1000 + 2000*i);
   end;
 
-  Characer.AddKeyFrame(MidStanding,50, 20000);
-  Characer.AddKeyFrame(Standing,50, 20500);
-  Characer.AddKeyFrame(Bending, 50, 21000);
-  Characer.AddKeyFrame(Carrying, 50, 22000);
-  Characer.AddKeyFrame(Carrying, 50, 25000);
+  Characer.AddKeyFrame(MidStanding,50, 3500);
+  Characer.AddKeyFrame(Standing,50, 4000);
+  Characer.AddKeyFrame(Bending, 50, 5000);
+  Characer.AddKeyFrame(Carrying, 50, 5500);
 
-  for I := 0 to 8 do
+  for I := 0 to 10 do
   begin
     Medium.AddKeyFrame(SittingMed, 50, 2000*i);
     Medium.AddKeyFrame(SittingMed2, 50, 1000 + 2000*i);
   end;
-
-  Medium.AddKeyFrame(Ready, 50, 17500);
-  Medium.AddKeyFrame(Ready, 50, 18000);
-  Medium.AddKeyFrame(CarryMid, 50, 19000);
-  Medium.AddKeyFrame(CarryMid, 50, 25000);
 
   Start := 0;
   Period := 1150;
@@ -343,26 +316,13 @@ begin
   StandingBig[1, 1] := 1100;
   StandingBig[1, 2] := 700;
 
-  Big.AddKeyFrame(WalkTear8, 50, 20000);
+  Big.AddKeyFrame(StandingBig, 50,20000);
 
-  sSnow.AddKeyFrame([],[TEllipse.Create(370,700,470,800,clBlack,clWhite)],[],[],0);
-  sSnow.AddKeyFrame([],[TEllipse.Create(370,700,470,800,clBlack,clWhite)],[],[],21000);
-  sSnow.AddKeyFrame([],[TEllipse.Create(350,590,450,690,clBlack,clWhite)],[],[],22000);
-  sSnow.AddKeyFrame([],[TEllipse.Create(350,590,450,690,clBlack,clWhite)],[],[],25000);
-  sSnow.AddKeyFrame([],[TEllipse.Create(950,490,1050,590,clBlack,clWhite)],[],[],26000);
-  sSnow.AddKeyFrame([],[TEllipse.Create(950,490,1050,590,clBlack,clWhite)],[],[],30000);
-
-  mSnow.AddKeyFrame([],[TEllipse.Create(1300,750,1450,900,clBlack,clWhite)],[],[],0);
-  mSnow.AddKeyFrame([],[TEllipse.Create(1300,750,1450,900,clBlack,clWhite)],[],[],18000);
-  mSnow.AddKeyFrame([],[TEllipse.Create(1320,590,1470,740,clBlack,clWhite)],[],[],19000);
-  mSnow.AddKeyFrame([],[TEllipse.Create(925,570,1075,720,clBlack,clWhite)],[],[],25000);
-  mSnow.AddKeyFrame([],[TEllipse.Create(925,570,1075,720,clBlack,clWhite)],[],[],30000);
-
-  bSnow.AddKeyFrame([],[TEllipse.Create(170,520,250,600,clBlack,clWhite)],[],[],0);
-  bSnow.AddKeyFrame([],[TEllipse.Create(1700,400,1900,600,clBlack,clWhite)],[],[],11700);
-  bSnow.AddKeyFrame([],[TEllipse.Create(1700,400,1900,600,clBlack,clWhite)],[],[],14000);
-  bSnow.AddKeyFrame([],[TEllipse.Create(900,700,1100,900,clBlack,clWhite)],[],[],17200);
-  bSnow.AddKeyFrame([],[TEllipse.Create(900,700,1100,900,clBlack,clWhite)],[],[],30000);
+  Snowballs.AddKeyFrame([],[TEllipse.Create(370,700,470,800,clBlack,clWhite),TEllipse.Create(1300,750,1450,900,clBlack,clWhite),TEllipse.Create(170,520,250,600,clBlack,clWhite)],[],[],0);
+  Snowballs.AddKeyFrame([],[TEllipse.Create(370,700,470,800,clBlack,clWhite),TEllipse.Create(1300,750,1450,900,clBlack,clWhite),TEllipse.Create(1700,400,1900,600,clBlack,clWhite)],[],[],11700);
+  Snowballs.AddKeyFrame([],[TEllipse.Create(370,700,470,800,clBlack,clWhite),TEllipse.Create(1300,750,1450,900,clBlack,clWhite),TEllipse.Create(1700,400,1900,600,clBlack,clWhite)],[],[],14000);
+  Snowballs.AddKeyFrame([],[TEllipse.Create(370,700,470,800,clBlack,clWhite),TEllipse.Create(1300,750,1450,900,clBlack,clWhite),TEllipse.Create(900,700,1100,900,clBlack,clWhite)],[],[],17200);
+  Snowballs.AddKeyFrame([],[TEllipse.Create(370,700,470,800,clBlack,clWhite),TEllipse.Create(1300,750,1450,900,clBlack,clWhite),TEllipse.Create(900,700,1100,900,clBlack,clWhite)],[],[],20000);
 
   bg.AddKeyFrame([TRectangle.Create(0, 500, 2000, 550, clBlack, ClWhite),
 
@@ -457,12 +417,10 @@ begin
   Form2.MediaPlayer1.Play;
 
   Driver.AddDrawObj(bg);
-  Driver.AddDrawObj(bSnow);
-  Driver.AddDrawObj(Big);
-  Driver.AddDrawObj(mSnow);
-  Driver.AddDrawObj(sSnow);
+  Driver.AddDrawObj(Snowballs);
   Driver.AddDrawObj(Characer);
   Driver.AddDrawObj(Medium);
+  Driver.AddDrawObj(Big);
 end;
 
 procedure TForm2.OnPaint(Sender: TObject);
