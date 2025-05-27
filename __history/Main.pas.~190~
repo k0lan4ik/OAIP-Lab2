@@ -62,23 +62,6 @@ var
   Walk8: TBodyPRow = ((1030, 700), (0, -1), (0, -1), (0, -1), (-1, 6), (-1, 5),
     (1, 3), (1, 5), (-1, 5), (-1, 2), (2, 1), (1, 3), (1, 3), (5, 1));
 
-  Walktear1: TBodyPRow = ((0, 0), (0, -1), (0, -1), (0, -1), (-1, 0), (-1, 0),
-    (-1, 1), (-1, -1), (0, 1), (1, 1), (-1, 1), (-1, 5), (0, 1), (-1, 0));
-  Walktear2: TBodyPRow = ((0, 0), (0, -1), (0, -1), (0, -1), (-1, 1), (-1, -1),
-    (-1, 1), (-1, -1), (-1, 6), (3, 1), (-3, 1), (0, 1), (1, 5), (-1, 0));
-  Walktear3: TBodyPRow = ((0, 0), (0, -1), (0, -1), (0, -1), (-1, 1), (-1, -1),
-    (-1, 0), (-1, 0), (-1, 3), (1, 5), (-5, 1), (1, 5), (1, 3), (-2, 1));
-  Walktear4: TBodyPRow = ((0, 0), (0, -1), (0, -1), (0, -1), (-1, 0), (-1, 0),
-    (-1, 0), (-1, 0), (-1, 3), (-1, 3), (-5, 1), (1, 5), (1, 2), (-2, 1));
-  Walktear5: TBodyPRow = ((0, 0), (0, -1), (0, -1), (0, -1), (-1, 0), (-1, 0),
-    (-1, 1), (-1, -1), (-1, 5), (0, 1), (-1, 0), (0, 1), (1, 1), (-1, 1));
-  Walktear6: TBodyPRow = ((0, 0), (0, -1), (0, -1), (0, -1), (-1, 1), (-1, -1),
-    (-1, 1), (-1, -1), (0, 1), (1, 5), (-1, 0), (-1, 6), (3, 1), (-3, 1));
-  Walktear7: TBodyPRow = ((0, 0), (0, -1), (0, -1), (0, -1), (-1, 1), (-1, -1),
-    (-1, 0), (-1, 0), (1, 5), (1, 3), (-2, 1), (-1, 3), (1, 5), (-5, 1));
-  Walktear8: TBodyPRow = ((0, 0), (0, -1), (0, -1), (0, -1), (-1, 0), (-1, 0),
-    (-1, 0), (-1, 0), (1, 5), (1, 2), (-2, 1), (-1, 3), (-1, 3), (-5, 1));
-
   CenteredUp: TBodyPRow = ((950, 600), (0, -1), (0, -1), (0, -1), (-1, 1),
     (0, 1), (1, 1), (0, 1), (-1, 1), (0, 1), (-1, 0), (1, 1), (0, 1), (1, 0));
   FlowLeftBase: TBodyPRow = ((950, 600), (0, -1), (0, -1), (-1, -1), (-1, 3),
@@ -149,7 +132,7 @@ end;
 
 procedure TForm2.OnCreate(Sender: TObject);
 var
-  Period, MovementX, MovementY, Start, Offset, I: integer;
+  Period, MovementX, Start, Offset, I: integer;
 begin
   Driver := TDrawer.Create(GetTickCount, 39999);
 
@@ -202,127 +185,12 @@ begin
     WalkBall8[1, 1] := WalkBall8[1, 1] + MovementX;
   end;
   Big.AddKeyFrame(StandingBig, 50,12000);
+  Big.AddKeyFrame(StandingBig, 50,13000);
 
-  Walk1[1, 1] := StandingBig[1, 1];
-  Walk1[1, 2] := StandingBig[1, 2];
-  Walk2[1, 1] := StandingBig[1, 1] + 25;
-  Walk2[1, 2] := StandingBig[1, 2];
-  Walk3[1, 1] := StandingBig[1, 1] + 50;
-  Walk3[1, 2] := StandingBig[1, 2];
-  Walk4[1, 1] := StandingBig[1, 1] + 75;
-  Walk4[1, 2] := StandingBig[1, 2];
-  Walk5[1, 1] := StandingBig[1, 1] + 100;
-  Walk5[1, 2] := StandingBig[1, 2];
-  Walk6[1, 1] := StandingBig[1, 1] + 125;
-  Walk6[1, 2] := StandingBig[1, 2];
-  Walk7[1, 1] := StandingBig[1, 1] + 150;
-  Walk7[1, 2] := StandingBig[1, 2];
-  Walk8[1, 1] := StandingBig[1, 1] + 175;
-  Walk8[1, 2] := StandingBig[1, 2];
-
-  Big.AddKeyFrame(Walk1, 50, 12000);
-  Big.AddKeyFrame(Walk2, 50, 12100);
-  Big.AddKeyFrame(Walk3, 50, 12200);
-  Big.AddKeyFrame(Walk4, 50, 12300);
-  Big.AddKeyFrame(Walk5, 50, 12400);
-  Big.AddKeyFrame(Walk6, 50, 12500);
-  Big.AddKeyFrame(Walk7, 50, 12600);
-  Big.AddKeyFrame(Walk8, 50, 12700);
-
-  Walk1[1, 1] := StandingBig[1, 1] + 200;
-  Walk1[1, 2] := StandingBig[1, 2];
-  Walk2[1, 1] := StandingBig[1, 1] + 225;
-  Walk2[1, 2] := StandingBig[1, 2];
-  Walk3[1, 1] := StandingBig[1, 1] + 250;
-  Walk3[1, 2] := StandingBig[1, 2];
-  Walk4[1, 1] := StandingBig[1, 1] + 275;
-  Walk4[1, 2] := StandingBig[1, 2];
-  Walk5[1, 1] := StandingBig[1, 1] + 300;
-  Walk5[1, 2] := StandingBig[1, 2];
-  Walk6[1, 1] := StandingBig[1, 1] + 325;
-  Walk6[1, 2] := StandingBig[1, 2];
-  Walk7[1, 1] := StandingBig[1, 1] + 350;
-  Walk7[1, 2] := StandingBig[1, 2];
-  Walk8[1, 1] := StandingBig[1, 1] + 375;
-  Walk8[1, 2] := StandingBig[1, 2];
-
-  Big.AddKeyFrame(Walk1, 50, 12800);
-  Big.AddKeyFrame(Walk2, 50, 12900);
-  Big.AddKeyFrame(Walk3, 50, 13000);
-  Big.AddKeyFrame(Walk4, 50, 13100);
-  Big.AddKeyFrame(Walk5, 50, 13200);
-  Big.AddKeyFrame(Walk6, 50, 13300);
-  Big.AddKeyFrame(Walk7, 50, 13400);
-  Big.AddKeyFrame(Walk8, 50, 13500);
-
-  WalkTear1[1, 1] := Walk8[1, 1];
-  WalkTear1[1, 2] := Walk8[1, 2];
-  WalkTear2[1, 1] := Walk8[1, 1] - 25;
-  WalkTear2[1, 2] := Walk8[1, 2] + 10;
-  WalkTear3[1, 1] := Walk8[1, 1] - 50;
-  WalkTear3[1, 2] := Walk8[1, 2] + 20;
-  WalkTear4[1, 1] := Walk8[1, 1] - 75;
-  WalkTear4[1, 2] := Walk8[1, 2] + 30;
-  WalkTear5[1, 1] := Walk8[1, 1] - 100;
-  WalkTear5[1, 2] := Walk8[1, 2] + 40;
-  WalkTear6[1, 1] := Walk8[1, 1] - 125;
-  WalkTear6[1, 2] := Walk8[1, 2] + 50;
-  WalkTear7[1, 1] := Walk8[1, 1] - 150;
-  WalkTear7[1, 2] := Walk8[1, 2] + 60;
-  WalkTear8[1, 1] := Walk8[1, 1] - 175;
-  WalkTear8[1, 2] := Walk8[1, 2] + 70;
-
-  movementX := 200;
-  movementY := 80;
-  period := 100;
-  start := 14000;
-  for i := 1 to 4 do
-  begin
-    Big.AddKeyFrame(WalkTear1, 50, start);
-    Start := Start + Period;
-    Big.AddKeyFrame(WalkTear2, 50, start);
-    Start := Start + Period;
-    Big.AddKeyFrame(WalkTear3, 50, start);
-    Start := Start + Period;
-    Big.AddKeyFrame(WalkTear4, 50, start);
-    Start := Start + Period;
-    Big.AddKeyFrame(WalkTear5, 50, start);
-    Start := Start + Period;
-    Big.AddKeyFrame(WalkTear6, 50, start);
-    Start := Start + Period;
-    Big.AddKeyFrame(WalkTear7, 50, start);
-    Start := Start + Period;
-    Big.AddKeyFrame(WalkTear8, 50, start);
-    Start := Start + Period;
-
-    WalkTear1[1, 1] := WalkTear1[1, 1] - movementX;
-    WalkTear1[1, 2] := WalkTear1[1, 2] + MovementY;
-    WalkTear2[1, 1] := WalkTear2[1, 1] - movementX;
-    WalkTear2[1, 2] := WalkTear2[1, 2] + MovementY;
-    WalkTear3[1, 1] := WalkTear3[1, 1] - movementX;
-    WalkTear3[1, 2] := WalkTear3[1, 2] + MovementY;
-    WalkTear4[1, 1] := WalkTear4[1, 1] - movementX;
-    WalkTear4[1, 2] := WalkTear4[1, 2] + MovementY;
-    WalkTear5[1, 1] := WalkTear5[1, 1] - movementX;
-    WalkTear5[1, 2] := WalkTear5[1, 2] + MovementY;
-    WalkTear6[1, 1] := WalkTear6[1, 1] - movementX;
-    WalkTear6[1, 2] := WalkTear6[1, 2] + MovementY;
-    WalkTear7[1, 1] := WalkTear7[1, 1] - movementX;
-    WalkTear7[1, 2] := WalkTear7[1, 2] + MovementY;
-    WalkTear8[1, 1] := WalkTear8[1, 1] - movementX;
-    WalkTear8[1, 2] := WalkTear8[1, 2] + MovementY;
-  end;
-
-  StandingBig[1, 1] := 1100;
-  StandingBig[1, 2] := 700;
-
-  Big.AddKeyFrame(StandingBig, 50,20000);
 
   Snowballs.AddKeyFrame([],[TEllipse.Create(370,700,470,800,clBlack,clWhite),TEllipse.Create(1300,750,1450,900,clBlack,clWhite),TEllipse.Create(170,520,250,600,clBlack,clWhite)],[],[],0);
-  Snowballs.AddKeyFrame([],[TEllipse.Create(370,700,470,800,clBlack,clWhite),TEllipse.Create(1300,750,1450,900,clBlack,clWhite),TEllipse.Create(1700,400,1900,600,clBlack,clWhite)],[],[],11700);
-  Snowballs.AddKeyFrame([],[TEllipse.Create(370,700,470,800,clBlack,clWhite),TEllipse.Create(1300,750,1450,900,clBlack,clWhite),TEllipse.Create(1700,400,1900,600,clBlack,clWhite)],[],[],14000);
-  Snowballs.AddKeyFrame([],[TEllipse.Create(370,700,470,800,clBlack,clWhite),TEllipse.Create(1300,750,1450,900,clBlack,clWhite),TEllipse.Create(900,700,1100,900,clBlack,clWhite)],[],[],17200);
-  Snowballs.AddKeyFrame([],[TEllipse.Create(370,700,470,800,clBlack,clWhite),TEllipse.Create(1300,750,1450,900,clBlack,clWhite),TEllipse.Create(900,700,1100,900,clBlack,clWhite)],[],[],20000);
+  Snowballs.AddKeyFrame([],[TEllipse.Create(370,700,470,800,clBlack,clWhite),TEllipse.Create(1300,750,1450,900,clBlack,clWhite),TEllipse.Create(1650,400,1850,600,clBlack,clWhite)],[],[],11700);
+  Snowballs.AddKeyFrame([],[TEllipse.Create(370,700,470,800,clBlack,clWhite),TEllipse.Create(1300,750,1450,900,clBlack,clWhite),TEllipse.Create(1650,400,1850,600,clBlack,clWhite)],[],[],14000);
 
   bg.AddKeyFrame([TRectangle.Create(0, 500, 2000, 550, clBlack, ClWhite),
 

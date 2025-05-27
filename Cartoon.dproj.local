@@ -6,17 +6,17 @@
     <Transaction>1899.12.30 00:00:00.000.464,=D:\Университет\Delphi\Unit2.pas</Transaction>
     <Transaction>1899.12.30 00:00:00.000.582,=D:\Университет\Delphi\Unit2.pas</Transaction>
     <Transaction>1899.12.30 00:00:00.000.118,=D:\Университет\1 курс\ОАиП\OAIP-Lab2\BackGroundController.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.287,=D:\Университет\1 курс\ОАиП\OAIP-Lab2\drawSomeThing.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.203,=D:\Университет\1 курс\ОАиП\OAIP-Lab2\PointConverter.pas</Transaction>
     <Transaction>1899.12.30 00:00:00.000.002,D:\Университет\1 курс\ОАиП\OAIP-Lab2\KeyFrameControl.pas=D:\Университет\1 курс\ОАиП\OAIP-Lab2\EventController.pas</Transaction>
     <Transaction>1899.12.30 00:00:00.000.543,=D:\Университет\Delphi\Unit2.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.679,D:\Университет\1 курс\ОАиП\OAIP-Lab2\Main.dfm=D:\Университет\Delphi\Unit2.dfm</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.963,=D:\Университет\1 курс\ОАиП\OAIP-Lab2\Unit1.pas</Transaction>
     <Transaction>1899.12.30 00:00:00.000.336,D:\Университет\1 курс\ОАиП\OAIP-Lab2\Unit1.pas=D:\Университет\1 курс\ОАиП\OAIP-Lab2\KeyFrameControl.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.679,D:\Университет\1 курс\ОАиП\OAIP-Lab2\Main.pas=D:\Университет\Delphi\Unit2.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.887,D:\Университет\1 курс\ОАиП\OAIP-Lab2\Cartoon.dproj=D:\Университет\Delphi\Project3.dproj</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.206,=D:\Университет\1 курс\ОАиП\OAIP-Lab2\Unit1.pas</Transaction>
     <Transaction>1899.12.30 00:00:00.000.390,D:\Университет\1 курс\ОАиП\OAIP-Lab2\Unit1.pas=D:\Университет\1 курс\ОАиП\OAIP-Lab2\CharacterController.pas</Transaction>
-    <Transaction>2025.05.26 20:04:19.707,=D:\Университет\1 курс\ОАиП\OAIP-Lab2\film.pas</Transaction>
-    <Transaction>2025.05.26 20:49:38.203,=D:\Университет\1 курс\ОАиП\OAIP-Lab2\PointConverter.pas</Transaction>
-    <Transaction>2025.05.26 20:49:48.287,=D:\Университет\1 курс\ОАиП\OAIP-Lab2\drawSomeThing.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.707,=D:\Университет\1 курс\ОАиП\OAIP-Lab2\film.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.679,D:\Университет\1 курс\ОАиП\OAIP-Lab2\Main.pas=D:\Университет\Delphi\Unit2.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.679,D:\Университет\1 курс\ОАиП\OAIP-Lab2\Main.dfm=D:\Университет\Delphi\Unit2.dfm</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.887,D:\Университет\1 курс\ОАиП\OAIP-Lab2\Cartoon.dproj=D:\Университет\Delphi\Project3.dproj</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.963,=D:\Университет\1 курс\ОАиП\OAIP-Lab2\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.206,=D:\Университет\1 курс\ОАиП\OAIP-Lab2\Unit1.pas</Transaction>
   </Transactions>
 </BorlandProject>

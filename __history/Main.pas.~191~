@@ -321,8 +321,8 @@ begin
   Snowballs.AddKeyFrame([],[TEllipse.Create(370,700,470,800,clBlack,clWhite),TEllipse.Create(1300,750,1450,900,clBlack,clWhite),TEllipse.Create(170,520,250,600,clBlack,clWhite)],[],[],0);
   Snowballs.AddKeyFrame([],[TEllipse.Create(370,700,470,800,clBlack,clWhite),TEllipse.Create(1300,750,1450,900,clBlack,clWhite),TEllipse.Create(1700,400,1900,600,clBlack,clWhite)],[],[],11700);
   Snowballs.AddKeyFrame([],[TEllipse.Create(370,700,470,800,clBlack,clWhite),TEllipse.Create(1300,750,1450,900,clBlack,clWhite),TEllipse.Create(1700,400,1900,600,clBlack,clWhite)],[],[],14000);
-  Snowballs.AddKeyFrame([],[TEllipse.Create(370,700,470,800,clBlack,clWhite),TEllipse.Create(1300,750,1450,900,clBlack,clWhite),TEllipse.Create(900,700,1100,900,clBlack,clWhite)],[],[],17200);
-  Snowballs.AddKeyFrame([],[TEllipse.Create(370,700,470,800,clBlack,clWhite),TEllipse.Create(1300,750,1450,900,clBlack,clWhite),TEllipse.Create(900,700,1100,900,clBlack,clWhite)],[],[],20000);
+  Snowballs.AddKeyFrame([],[TEllipse.Create(370,700,470,800,clBlack,clWhite),TEllipse.Create(1300,750,1450,900,clBlack,clWhite),TEllipse.Create(900,600,1100,800,clBlack,clWhite)],[],[],17200);
+  Snowballs.AddKeyFrame([],[TEllipse.Create(370,700,470,800,clBlack,clWhite),TEllipse.Create(1300,750,1450,900,clBlack,clWhite),TEllipse.Create(900,600,1100,800,clBlack,clWhite)],[],[],20000);
 
   bg.AddKeyFrame([TRectangle.Create(0, 500, 2000, 550, clBlack, ClWhite),
 
