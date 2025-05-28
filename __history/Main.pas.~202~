@@ -218,7 +218,7 @@ procedure TForm2.OnCreate(Sender: TObject);
 var
   Period, MovementX, MovementY, Start, Offset, I: integer;
 begin
-  Driver := TDrawer.Create(GetTickCount, 50000);
+  Driver := TDrawer.Create(GetTickCount-27000, 50000);
 
   bg := TBackground.Create;
   Big := TCharacter.Create;

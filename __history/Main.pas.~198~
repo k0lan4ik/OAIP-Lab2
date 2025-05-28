@@ -166,35 +166,6 @@ var
   WalkMidCarryBall8: TBodyPRow = ((0, 0), (0, -1), (0, -1), (0, -1), (-1, 1), (-1, 0),
     (-1, 1), (-1, 0), (1, 5), (1, 2), (-2, 1), (-1, 3), (-1, 3), (-5, 1));
 
-  ThrowSmall1: TBodyPRow = ((320, 700), (0, -1), (1, -5), (1, -4), (1, 0), (0, -1),
-    (1, 0), (0, -1), (1, 4), (0, 1), (1, 0), (0, 1), (0, 1), (1, 0));
-  ThrowSmall2: TBodyPRow = ((320, 700), (0, -1), (1, -5), (1, -4), (1, -1), (-1, -1),
-    (1, -1), (-1, -1), (1, 4), (0, 1), (1, 0), (0, 1), (0, 1), (1, 0));
-  ThrowSmall3: TBodyPRow = ((320, 700), (0, -1), (1, -5), (1, -4), (0, -1), (-1, 0),
-    (0, -1), (-1, 0), (1, 4), (0, 1), (1, 0), (0, 1), (0, 1), (1, 0));
-  ThrowSmall4: TBodyPRow = ((320, 700), (0, -1), (1, -5), (1, -4), (1, -1), (-1, -1),
-    (1, -1), (-1, -1), (1, 4), (0, 1), (1, 0), (0, 1), (0, 1), (1, 0));
-  ThrowSmall5: TBodyPRow = ((320, 700), (0, -1), (1, -5), (1, -4), (1, -1), (1, -1),
-    (1, -1), (1, -1), (1, 4), (0, 1), (1, 0), (0, 1), (0, 1), (1, 0));
-
-  Spin1: TBodyPRow = ((1600, 800), (0, -1), (0, -1), (0, -1), (-1, -1), (-1, -1),
-    (1, 1), (0, 1), (-1,15),(0,1),(-1,0),(-1,5),(0,1),(-1,0));
-  Spin2: TBodyPRow = ((1600, 800), (0, -1), (0, -1), (0, -1), (-1, 0), (-1, -1),
-    (1, 0), (1, 1), (-1,15),(0,1),(-1,0),(-1,5),(0,1),(-1,0));
-  Spin3: TBodyPRow = ((1600, 800), (0, -1), (0, -1), (0, -1), (-1, 1), (-1, 0),
-    (1, -1), (1, 0), (-1,15),(0,1),(-1,0),(-1,5),(0,1),(-1,0));
-  Spin4: TBodyPRow = ((1600, 800), (0, -1), (0, -1), (0, -1), (0, 1), (-1, 1),
-    (0, -1), (1, -1), (-1,15),(0,1),(-1,0),(-1,5),(0,1),(-1,0));
-  Spin5: TBodyPRow = ((1600, 800), (0, -1), (0, -1), (0, -1), (1, 1), (0, 1),
-    (-1, -1), (-1, -1), (-1,15),(0,1),(-1,0),(-1,5),(0,1),(-1,0));
-  Spin6: TBodyPRow = ((1600, 800), (0, -1), (0, -1), (0, -1), (1, 0), (1, 1),
-    (-1, 0), (-1, -1), (-1,15),(0,1),(-1,0),(-1,5),(0,1),(-1,0));
-  Spin7: TBodyPRow = ((1600, 800), (0, -1), (0, -1), (0, -1), (1, -1), (1, 0),
-    (-1, 1), (-1, 0), (-1,15),(0,1),(-1,0),(-1,5),(0,1),(-1,0));
-  Spin8: TBodyPRow = ((1600, 800), (0, -1), (0, -1), (0, -1), (0, -1), (1, -1),
-    (0, 1), (-1, 1), (-1,15),(0,1),(-1,0),(-1,5),(0,1),(-1,0));
-
-
 
   StandingBig: TBodyPRow = ((1550, 500), (0, -1), (0, -1), (0, -1), (-1, 6), (-1, 5),
     (1, 3), (1, 5), (-1, 5), (-1, 2), (2, 1), (1, 3), (1, 3), (5, 1));
@@ -205,7 +176,7 @@ var
 
 var
   Characer, Medium, Big: TCharacter;
-  bg, sSnow, mSnow, bSnow, stone1, stone2, stone3, stone4, stone5, carrot, eye1, eye2: TBackGround;
+  bg, sSnow, mSnow, bSnow: TBackGround;
   Driver: TDrawer;
 
 procedure TForm2.FormDestroy(Sender: TObject);
@@ -218,7 +189,7 @@ procedure TForm2.OnCreate(Sender: TObject);
 var
   Period, MovementX, MovementY, Start, Offset, I: integer;
 begin
-  Driver := TDrawer.Create(GetTickCount, 50000);
+  Driver := TDrawer.Create(GetTickCount-15000, 29999);
 
   bg := TBackground.Create;
   Big := TCharacter.Create;
@@ -227,14 +198,6 @@ begin
   sSnow:= TBackground.Create;
   mSnow:= TBackground.Create;
   bSnow:= TBackground.Create;
-  stone1 := TBackground.Create;
-  stone2 := TBackground.Create;
-  stone3 := TBackground.Create;
-  stone4 := TBackground.Create;
-  stone5 := TBackground.Create;
-  carrot := TBackground.Create;
-  eye1 := TBackground.Create;
-  eye2 := TBackground.Create;
   for I := 0 to 9 do
   begin
     Characer.AddKeyFrame(Sitting, 50, 2000*i);
@@ -245,20 +208,7 @@ begin
   Characer.AddKeyFrame(Standing,50, 20500);
   Characer.AddKeyFrame(Bending, 50, 21000);
   Characer.AddKeyFrame(Carrying, 50, 22000);
-
-  Characer.AddKeyFrame(ThrowSmall1, 50, 22200);
-  Characer.AddKeyFrame(ThrowSmall2, 50, 22400);
-  Characer.AddKeyFrame(ThrowSmall3, 50, 22600);
-  Characer.AddKeyFrame(ThrowSmall4, 50, 22800);
-  Characer.AddKeyFrame(ThrowSmall5, 50, 23000);
-
   Characer.AddKeyFrame(Carrying, 50, 25000);
-
-  Centered[1, 1] := Carrying[1, 1];
-  Centered[1, 2] := Carrying[1, 2];
-
-  Characer.AddKeyFrame(Centered, 50, 26000);
-  Characer.AddKeyFrame(Centered, 50, 50000);
 
   for I := 0 to 8 do
   begin
@@ -383,63 +333,7 @@ begin
     Walk8[1, 2] := Walk8[1, 2] - MovementY;
   end;
 
-  for i := 1 to 4 do
-  begin
-    Medium.AddKeyFrame(Spin1, 50, start);
-    Start := Start + Period;
-    Medium.AddKeyFrame(Spin2, 50, start);
-    Start := Start + Period;
-    Medium.AddKeyFrame(Spin3, 50, start);
-    Start := Start + Period;
-    Medium.AddKeyFrame(Spin4, 50, start);
-    Start := Start + Period;
-    Medium.AddKeyFrame(Spin5, 50, start);
-    Start := Start + Period;
-    Medium.AddKeyFrame(Spin6, 50, start);
-    Start := Start + Period;
-    Medium.AddKeyFrame(Spin7, 50, start);
-    Start := Start + Period;
-    Medium.AddKeyFrame(Spin8, 50, start);
-    Start := Start + Period;
-  end;
 
-  Centered[1, 1] := Walk8[1, 1] - movementX;
-  Centered[1, 2] := Walk8[1, 2] + MovementY;
-
-  Medium.AddKeyFrame(Centered, 50, 33000);
-  Medium.AddKeyFrame(Centered, 50, 50000);
-
-  stone1.AddKeyFrame([], [TEllipse.Create(1520, 620, 1540, 640, clBlack, clBlack)], [], [], 28000);
-  stone1.AddKeyFrame([], [TEllipse.Create(990, 860, 1010, 880, clBlack, clBlack)], [], [], 29000);
-  stone1.AddKeyFrame([], [TEllipse.Create(990, 860, 1010, 880, clBlack, clBlack)], [], [], 50000);
-
-  stone2.AddKeyFrame([], [TEllipse.Create(1520, 620, 1540, 640, clBlack, clBlack)], [], [], 28500);
-  stone2.AddKeyFrame([], [TEllipse.Create(990, 810, 1010, 830, clBlack, clBlack)], [], [], 29500);
-  stone2.AddKeyFrame([], [TEllipse.Create(990, 810, 1010, 830, clBlack, clBlack)], [], [], 50000);
-
-  stone3.AddKeyFrame([], [TEllipse.Create(1520, 620, 1540, 640, clBlack, clBlack)], [], [], 29000);
-  stone3.AddKeyFrame([], [TEllipse.Create(990, 760, 1010, 780, clBlack, clBlack)], [], [], 30000);
-  stone3.AddKeyFrame([], [TEllipse.Create(990, 760, 1010, 780, clBlack, clBlack)], [], [], 50000);
-
-  stone4.AddKeyFrame([], [TEllipse.Create(1520, 620, 1540, 640, clBlack, clBlack)], [], [], 29500);
-  stone4.AddKeyFrame([], [TEllipse.Create(990, 700, 1010, 720, clBlack, clBlack)], [], [], 30500);
-  stone4.AddKeyFrame([], [TEllipse.Create(990, 700, 1010, 720, clBlack, clBlack)], [], [], 50000);
-
-  stone5.AddKeyFrame([], [TEllipse.Create(1520, 620, 1540, 640, clBlack, clBlack)], [], [], 30000);
-  stone5.AddKeyFrame([], [TEllipse.Create(990, 650, 1010, 670, clBlack, clBlack)], [], [], 31000);
-  stone5.AddKeyFrame([], [TEllipse.Create(990, 650, 1010, 670, clBlack, clBlack)], [], [], 50000);
-
-  carrot.AddKeyFrame([], [TEllipse.Create(1520, 620, 1540, 640, $00A5FF, $00A5FF)], [], [], 30500);
-  carrot.AddKeyFrame([], [TEllipse.Create(990, 580, 1010, 600, $00A5FF, $00A5FF)], [], [], 31500);
-  carrot.AddKeyFrame([], [TEllipse.Create(990, 580, 1010, 600, $00A5FF, $00A5FF)], [], [], 50000);
-
-  eye1.AddKeyFrame([], [TEllipse.Create(1520, 620, 1540, 640, clBlack, clBlack)], [], [], 31000);
-  eye1.AddKeyFrame([], [TEllipse.Create(965, 555, 985, 575, clBlack, clBlack)], [], [], 32000);
-  eye1.AddKeyFrame([], [TEllipse.Create(965, 555, 985, 575, clBlack, clBlack)], [], [], 50000);
-
-  eye2.AddKeyFrame([], [TEllipse.Create(1520, 620, 1540, 640, clBlack, clBlack)], [], [], 31500);
-  eye2.AddKeyFrame([], [TEllipse.Create(1015, 555, 1035, 575, clBlack, clBlack)], [], [], 32500);
-  eye2.AddKeyFrame([], [TEllipse.Create(1015, 555, 1035, 575, clBlack, clBlack)], [], [], 50000);
 
   Start := 0;
   Period := 1150;
@@ -636,30 +530,26 @@ begin
   Centered[1, 1] := Walk8[1, 1] - movementX;
   Centered[1, 2] := Walk8[1, 2] + movementY;
   Big.AddKeyFrame(Centered, 50, 19800);
-  Big.AddKeyFrame(Centered, 50, 50000);
+  Big.AddKeyFrame(Centered, 50, 40000);
 
   sSnow.AddKeyFrame([],[TEllipse.Create(370,700,470,800,clBlack,clWhite)],[],[],0);
   sSnow.AddKeyFrame([],[TEllipse.Create(370,700,470,800,clBlack,clWhite)],[],[],21000);
   sSnow.AddKeyFrame([],[TEllipse.Create(350,590,450,690,clBlack,clWhite)],[],[],22000);
-  sSnow.AddKeyFrame([],[TEllipse.Create(350,500,450,600,clBlack,clWhite)],[],[],22200);
-  sSnow.AddKeyFrame([],[TEllipse.Create(300,450,400,550,clBlack,clWhite)],[],[],22400);
-  sSnow.AddKeyFrame([],[TEllipse.Create(250,500,350,600,clBlack,clWhite)],[],[],22600);
-  sSnow.AddKeyFrame([],[TEllipse.Create(300,450,400,550,clBlack,clWhite)],[],[],22800);
-  sSnow.AddKeyFrame([],[TEllipse.Create(350,500,450,600,clBlack,clWhite)],[],[],23000);
-  sSnow.AddKeyFrame([],[TEllipse.Create(950,530,1050,630,clBlack,clWhite)],[],[],24000);
-  sSnow.AddKeyFrame([],[TEllipse.Create(950,530,1050,630,clBlack,clWhite)],[],[],50000);
+  sSnow.AddKeyFrame([],[TEllipse.Create(350,590,450,690,clBlack,clWhite)],[],[],25000);
+  sSnow.AddKeyFrame([],[TEllipse.Create(950,490,1050,590,clBlack,clWhite)],[],[],26000);
+  sSnow.AddKeyFrame([],[TEllipse.Create(950,490,1050,590,clBlack,clWhite)],[],[],30000);
 
   mSnow.AddKeyFrame([],[TEllipse.Create(1300,750,1450,900,clBlack,clWhite)],[],[],0);
   mSnow.AddKeyFrame([],[TEllipse.Create(1300,750,1450,900,clBlack,clWhite)],[],[],18000);
   mSnow.AddKeyFrame([],[TEllipse.Create(1320,590,1470,740,clBlack,clWhite)],[],[],19000);
   mSnow.AddKeyFrame([],[TEllipse.Create(925,590,1075,740,clBlack,clWhite)],[],[],23000);
-  mSnow.AddKeyFrame([],[TEllipse.Create(925,590,1075,740,clBlack,clWhite)],[],[],50000);
+  mSnow.AddKeyFrame([],[TEllipse.Create(925,590,1075,740,clBlack,clWhite)],[],[],30000);
 
   bSnow.AddKeyFrame([],[TEllipse.Create(170,520,250,600,clBlack,clWhite)],[],[],0);
   bSnow.AddKeyFrame([],[TEllipse.Create(1700,400,1900,600,clBlack,clWhite)],[],[],11700);
   bSnow.AddKeyFrame([],[TEllipse.Create(1700,400,1900,600,clBlack,clWhite)],[],[],14000);
   bSnow.AddKeyFrame([],[TEllipse.Create(900,700,1100,900,clBlack,clWhite)],[],[],17200);
-  bSnow.AddKeyFrame([],[TEllipse.Create(900,700,1100,900,clBlack,clWhite)],[],[],50000);
+  bSnow.AddKeyFrame([],[TEllipse.Create(900,700,1100,900,clBlack,clWhite)],[],[],30000);
 
   bg.AddKeyFrame([TRectangle.Create(0, 500, 2000, 550, clBlack, ClWhite),
 
@@ -743,7 +633,7 @@ begin
     [TPolygon.Create([Point(100, 490), Point(110, 460), Point(190, 460), Point(200, 490)], clBlack, clWhite),
     TPolygon.Create([Point(1800, 490), Point(1810, 460), Point(1890, 460), Point(1900, 490)], clBlack, clWhite),
     TPolygon.Create([Point(900, 490), Point(910, 460), Point(990, 460), Point(1000, 490)], clBlack, clWhite)],
-    50000);
+    40000);
 
   HouseInit;
 
@@ -760,14 +650,6 @@ begin
   Driver.AddDrawObj(sSnow);
   Driver.AddDrawObj(Characer);
   Driver.AddDrawObj(Medium);
-  Driver.AddDrawObj(Stone1);
-  Driver.AddDrawObj(Stone2);
-  Driver.AddDrawObj(Stone3);
-  Driver.AddDrawObj(Stone4);
-  Driver.AddDrawObj(Stone5);
-  Driver.AddDrawObj(Carrot);
-  Driver.AddDrawObj(eye1);
-  Driver.AddDrawObj(eye2);
 end;
 
 procedure TForm2.OnPaint(Sender: TObject);

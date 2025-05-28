@@ -218,7 +218,7 @@ procedure TForm2.OnCreate(Sender: TObject);
 var
   Period, MovementX, MovementY, Start, Offset, I: integer;
 begin
-  Driver := TDrawer.Create(GetTickCount, 50000);
+  Driver := TDrawer.Create(GetTickCount-27000, 50000);
 
   bg := TBackground.Create;
   Big := TCharacter.Create;
@@ -403,12 +403,6 @@ begin
     Start := Start + Period;
   end;
 
-  Centered[1, 1] := Walk8[1, 1] - movementX;
-  Centered[1, 2] := Walk8[1, 2] + MovementY;
-
-  Medium.AddKeyFrame(Centered, 50, 33000);
-  Medium.AddKeyFrame(Centered, 50, 50000);
-
   stone1.AddKeyFrame([], [TEllipse.Create(1520, 620, 1540, 640, clBlack, clBlack)], [], [], 28000);
   stone1.AddKeyFrame([], [TEllipse.Create(990, 860, 1010, 880, clBlack, clBlack)], [], [], 29000);
   stone1.AddKeyFrame([], [TEllipse.Create(990, 860, 1010, 880, clBlack, clBlack)], [], [], 50000);
@@ -433,13 +427,9 @@ begin
   carrot.AddKeyFrame([], [TEllipse.Create(990, 580, 1010, 600, $00A5FF, $00A5FF)], [], [], 31500);
   carrot.AddKeyFrame([], [TEllipse.Create(990, 580, 1010, 600, $00A5FF, $00A5FF)], [], [], 50000);
 
-  eye1.AddKeyFrame([], [TEllipse.Create(1520, 620, 1540, 640, clBlack, clBlack)], [], [], 31000);
-  eye1.AddKeyFrame([], [TEllipse.Create(965, 555, 985, 575, clBlack, clBlack)], [], [], 32000);
-  eye1.AddKeyFrame([], [TEllipse.Create(965, 555, 985, 575, clBlack, clBlack)], [], [], 50000);
-
-  eye2.AddKeyFrame([], [TEllipse.Create(1520, 620, 1540, 640, clBlack, clBlack)], [], [], 31500);
-  eye2.AddKeyFrame([], [TEllipse.Create(1015, 555, 1035, 575, clBlack, clBlack)], [], [], 32500);
-  eye2.AddKeyFrame([], [TEllipse.Create(1015, 555, 1035, 575, clBlack, clBlack)], [], [], 50000);
+  eye1.AddKeyFrame([], [TEllipse.Create(1520, 620, 1540, 640, clBlack, clBlack)], [], [], 3100);
+  eye1.AddKeyFrame([], [TEllipse.Create(990, 580, 1010, 600, clBlack, clBlack)], [], [], 32000);
+  eye1.AddKeyFrame([], [TEllipse.Create(990, 580, 1010, 600, clBlack, clBlack)], [], [], 50000);
 
   Start := 0;
   Period := 1150;
@@ -636,7 +626,7 @@ begin
   Centered[1, 1] := Walk8[1, 1] - movementX;
   Centered[1, 2] := Walk8[1, 2] + movementY;
   Big.AddKeyFrame(Centered, 50, 19800);
-  Big.AddKeyFrame(Centered, 50, 50000);
+  Big.AddKeyFrame(Centered, 50, 40000);
 
   sSnow.AddKeyFrame([],[TEllipse.Create(370,700,470,800,clBlack,clWhite)],[],[],0);
   sSnow.AddKeyFrame([],[TEllipse.Create(370,700,470,800,clBlack,clWhite)],[],[],21000);
